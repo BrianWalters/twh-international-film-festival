@@ -32,8 +32,8 @@
                             <td>{{ movie.startTime|date }}</td>
                             <td>{{ movie.runtime }}</td>
                             <td>
-                                <a href="{{ path('movie_show', {'id': movie.id}) }}">show</a>
-                                <a href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
+                                <a class="btn btn-secondary" href="{{ path('movie_show', {'id': movie.id}) }}">show</a>
+                                <a class="btn btn-primary" href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
                             </td>
                         </tr>
                     {% else %}

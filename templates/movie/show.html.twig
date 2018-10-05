@@ -3,36 +3,44 @@
 {% block title %}Movie{% endblock %}
 
 {% block body %}
-    <h1>Movie</h1>
+    <main class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h1>Movie</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ movie.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ movie.title }}</td>
-            </tr>
-            <tr>
-                <th>Imdb</th>
-                <td>{{ movie.imdb }}</td>
-            </tr>
-            <tr>
-                <th>StartTime</th>
-                <td>{{ movie.startTime }}</td>
-            </tr>
-            <tr>
-                <th>Runtime</th>
-                <td>{{ movie.runtime }}</td>
-            </tr>
-        </tbody>
-    </table>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ movie.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ movie.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Imdb</th>
+                        <td>{{ movie.imdb }}</td>
+                    </tr>
+                    <tr>
+                        <th>StartTime</th>
+                        <td>{{ movie.startTime|date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Runtime</th>
+                        <td>{{ movie.runtime }}</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-    <a href="{{ path('movie_index') }}">back to list</a>
+                <p>
+                    <a class="btn btn-secondary" href="{{ path('movie_index') }}">back to list</a>
 
-    <a href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
+                </p>
 
-    {{ include('movie/_delete_form.html.twig') }}
+                {{ include('movie/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </main>
 {% endblock %}

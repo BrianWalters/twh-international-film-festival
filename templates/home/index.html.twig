@@ -12,9 +12,10 @@
         {% for movie in movies %}
             <li class="row" style="margin-bottom: 24px;">
                 <div class="col-sm-3">
-                    <img src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
+                    <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
                 </div>
                 <div class="col-sm-9">
+                    <p>Starting at: {{ movie.startTime|date('h:i A') }}</p>
                     <h2>{{ movie.title }}</h2>
                     <p>
                         <a href="https://imdb.com/title/{{ movie.imdb }}">IMBd</a>
