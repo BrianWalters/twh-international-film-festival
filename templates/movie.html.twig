@@ -22,18 +22,16 @@
         <div class="row">
             <div class="col-sm">
                 <h2>Ratings</h2>
-                {% for rating in movie.ratings %}
-                    <div>
-                        <p>
-                            By <strong>{{ rating.rater }}</strong>
-                        </p>
-                        <p>
-                            {{ rating.score }}
-                        </p>
-                    </div>
-                {% else %}
-                    <p>No ratings yet!</p>
-                {% endfor %}
+
+                <ul class="list-group">
+                    {% for rating in movie.ratings %}
+                        <li class="list-group-item">
+                            {{ rating.score }} by <strong>{{ rating.rater }}</strong>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">No ratings yet!</li>
+                    {% endfor %}
+                </ul>
 
                 {{ form_start(ratingForm) }}
                 {{ form_widget(ratingForm) }}
@@ -45,14 +43,17 @@
 
             <div class="col-sm">
                 <h2>Comments</h2>
+
                 {% for comment in movie.comments %}
-                    <div>
-                        <p>
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
                             By <strong>{{ comment.commenter }}</strong>
-                        </p>
-                        <p>
-                            {{ comment.text }}
-                        </p>
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                {{ comment.text }}
+                            </p>
+                        </div>
                     </div>
                 {% else %}
                     <p>No comments yet!</p>
