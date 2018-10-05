@@ -22,12 +22,14 @@ class Rating
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Assert\Range(min="0", max="4")
      */
     private $score;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $rater;
 
@@ -47,7 +49,7 @@ class Rating
         return $this->score;
     }
 
-    public function setScore(int $score): self
+    public function setScore(?int $score): self
     {
         $this->score = $score;
 
@@ -59,7 +61,7 @@ class Rating
         return $this->rater;
     }
 
-    public function setRater(string $rater): self
+    public function setRater(?string $rater): self
     {
         $this->rater = $rater;
 

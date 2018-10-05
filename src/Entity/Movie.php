@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MovieRepository")
@@ -20,21 +21,27 @@ class Movie
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $imdb;
 
     /**
      * @ORM\Column(type="datetimetz")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
      */
     private $startTime;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Range(min="1")
      */
     private $runtime;
 
@@ -64,7 +71,7 @@ class Movie
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -76,7 +83,7 @@ class Movie
         return $this->imdb;
     }
 
-    public function setImdb(string $imdb): self
+    public function setImdb(?string $imdb): self
     {
         $this->imdb = $imdb;
 
@@ -88,7 +95,7 @@ class Movie
         return $this->startTime;
     }
 
-    public function setStartTime(\DateTimeInterface $startTime): self
+    public function setStartTime(?\DateTimeInterface $startTime): self
     {
         $this->startTime = $startTime;
 
@@ -100,7 +107,7 @@ class Movie
         return $this->runtime;
     }
 
-    public function setRuntime(int $runtime): self
+    public function setRuntime(?int $runtime): self
     {
         $this->runtime = $runtime;
 
