@@ -2,7 +2,7 @@ eight_points_guzzle:
     clients:
         omdb_client:
             # Write here the host where to do requests
-            # base_url: "http://target.url"
+            base_url: 'http://www.omdbapi.com/'
 
             options:
                 timeout: 30

@@ -7,5 +7,27 @@
             <h1>Feast of the Flesh</h1>
         </div>
     </div>
+
+    <ul>
+        {% for movie in movies %}
+            <li class="row" style="margin-bottom: 24px;">
+                <div class="col-sm-3">
+                    <img src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
+                </div>
+                <div class="col-sm-9">
+                    <h2>{{ movie.title }}</h2>
+                    <p>
+                        <a href="https://imdb.com/title/{{ movie.imdb }}">IMBd</a>
+                    </p>
+                    <dl>
+                        <dt>Release Date</dt>
+                        <dd>{{ omdb.getMovie(movie.imdb).Released }}</dd>
+                        <dt>Runtime</dt>
+                        <dd>{{ omdb.getMovie(movie.imdb).Runtime }}</dd>
+                    </dl>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 </main>
 {% endblock %}
