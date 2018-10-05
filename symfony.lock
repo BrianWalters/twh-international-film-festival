@@ -1,4 +1,7 @@
 {
+    "behat/transliterator": {
+        "version": "v1.2.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -77,11 +80,32 @@
     "egulias/email-validator": {
         "version": "2.1.6"
     },
+    "eightpoints/guzzle-bundle": {
+        "version": "7.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "7.0",
+            "ref": "8be83603226d268ee8a93721b5bb77ec71d8d334"
+        }
+    },
     "facebook/webdriver": {
         "version": "1.6.0"
     },
     "fig/link-util": {
         "version": "1.0.0"
+    },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.36"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -110,6 +134,9 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
@@ -126,6 +153,15 @@
             "branch": "master",
             "version": "5.2",
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        }
+    },
+    "stof/doctrine-extensions-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
         }
     },
     "swiftmailer/swiftmailer": {
