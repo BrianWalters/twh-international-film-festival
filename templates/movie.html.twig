@@ -34,6 +34,13 @@
                 {% else %}
                     <p>No ratings yet!</p>
                 {% endfor %}
+
+                {{ form_start(ratingForm) }}
+                {{ form_widget(ratingForm) }}
+                <p>
+                    <button class="btn btn-primary" type="submit" formnovalidate>Submit</button>
+                </p>
+                {{ form_end(ratingForm) }}
             </div>
 
             <div class="col-sm">
@@ -50,6 +57,13 @@
                 {% else %}
                     <p>No comments yet!</p>
                 {% endfor %}
+
+                {{ form_start(commentForm) }}
+                {{ form_widget(commentForm) }}
+                <p>
+                    <button class="btn btn-primary" type="submit" formnovalidate>Submit</button>
+                </p>
+                {{ form_end(commentForm) }}
             </div>
         </div>
     </main>
