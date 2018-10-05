@@ -1,46 +1,46 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<main class="container">
-    <div class="row">
-        <div class="col-sm">
-            <h1>Feast of the Flesh</h1>
+<main>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Feast of the Flesh Volume 9</h1>
+            <ul class="list-group">
+                {% for movie in movies %}
+                    <li class="list-group-item">
+                        {{ movie.startTime|date('h:i A') }} - <a href="{{ path('movie_details', {movie:movie.id}) }}">{{ movie.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
-    <ul style="padding: 0;">
-        {% for movie in movies %}
-            <li class="row" style="margin-bottom: 24px;">
-                <div class="col-sm-3">
-                    <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
-                </div>
-                <div class="col-sm-9">
-                    <p>
-                        <strong>
-                            Starting at: {{ movie.startTime|date('h:i A') }}
-                        </strong>
-                    </p>
-                    <div style="margin-bottom: 16px;">
-                        <h2 style="display:inline;">
-                            <a href="{{ path('movie_details', { 'movie': movie.id }) }}">{{ movie.title }}</a>
-                        </h2>
-                        <span>
+    <div class="container">
+        <ul style="padding: 0;">
+            {% for movie in movies %}
+                <li class="row" style="margin-bottom: 24px;">
+                    <div class="col-sm-3">
+                        <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
+                    </div>
+                    <div class="col-sm-9">
+                        <p>
+                            <strong>
+                                Starting at {{ movie.startTime|date('h:i A') }}
+                            </strong>
+                        </p>
+                        <div style="margin-bottom: 16px;">
+                            <h2 style="display:inline;">
+                                <a href="{{ path('movie_details', { 'movie': movie.id }) }}">{{ movie.title }}</a>
+                            </h2>
+                            <span>
                             <a href="https://imdb.com/title/{{ movie.imdb }}">(IMDb)</a>
                         </span>
+                        </div>
+                        {% include 'partials/movie-info.html.twig' %}
                     </div>
-                    <dl>
-                        <dt>Year</dt>
-                        <dd>{{ omdb.getMovie(movie.imdb).Year }}</dd>
-                        <dt>Runtime</dt>
-                        <dd>{{ omdb.getMovie(movie.imdb).Runtime }}</dd>
-                        <dt>Director</dt>
-                        <dd>{{ omdb.getMovie(movie.imdb).Director }}</dd>
-                        <dt>Box Office</dt>
-                        <dd>{{ omdb.getMovie(movie.imdb).BoxOffice }}</dd>
-                    </dl>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </main>
 {% endblock %}

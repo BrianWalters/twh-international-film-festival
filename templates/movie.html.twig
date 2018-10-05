@@ -7,15 +7,23 @@
         <div class="row">
             <div class="col-sm">
                 <p><a href="{{ path('home') }}">Back home</a></p>
-                <div>
+                <div style="margin-bottom: 24px;">
                     <h1 style="display:inline;">{{ movie.title }}</h1>
                     <span>
                         <a href="https://imdb.com/title/{{ movie.imdb }}">(IMDb)</a>
                     </span>
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
                 <p>
                     <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="{{ movie.title }}">
                 </p>
+            </div>
+            <div class="col-sm">
+                {% include 'partials/movie-info.html.twig' %}
             </div>
         </div>
 
@@ -65,6 +73,14 @@
                     <button class="btn btn-primary" type="submit" formnovalidate>Submit</button>
                 </p>
                 {{ form_end(commentForm) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <p>
+                    <a href="{{ path('home') }}">Back home</a>
+                </p>
             </div>
         </div>
     </main>
