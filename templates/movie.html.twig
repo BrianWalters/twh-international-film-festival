@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Feast of the Flesh | {{ movie.title }}{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div class="col-sm">
+                <p><a href="{{ path('home') }}">Back home</a></p>
+                <div>
+                    <h1 style="display:inline;">{{ movie.title }}</h1>
+                    <span>
+                        <a href="https://imdb.com/title/{{ movie.imdb }}">(IMDb)</a>
+                    </span>
+                </div>
+                <p>
+                    <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="{{ movie.title }}">
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <h2>Ratings</h2>
+                {% for rating in movie.ratings %}
+                    <div>
+                        <p>
+                            By <strong>{{ rating.rater }}</strong>
+                        </p>
+                        <p>
+                            {{ rating.score }}
+                        </p>
+                    </div>
+                {% else %}
+                    <p>No ratings yet!</p>
+                {% endfor %}
+            </div>
+
+            <div class="col-sm">
+                <h2>Comments</h2>
+                {% for comment in movie.comments %}
+                    <div>
+                        <p>
+                            By <strong>{{ comment.commenter }}</strong>
+                        </p>
+                        <p>
+                            {{ comment.text }}
+                        </p>
+                    </div>
+                {% else %}
+                    <p>No comments yet!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

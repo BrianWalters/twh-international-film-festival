@@ -8,23 +8,35 @@
         </div>
     </div>
 
-    <ul>
+    <ul style="padding: 0;">
         {% for movie in movies %}
             <li class="row" style="margin-bottom: 24px;">
                 <div class="col-sm-3">
                     <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
                 </div>
                 <div class="col-sm-9">
-                    <p>Starting at: {{ movie.startTime|date('h:i A') }}</p>
-                    <h2>{{ movie.title }}</h2>
                     <p>
-                        <a href="https://imdb.com/title/{{ movie.imdb }}">IMBd</a>
+                        <strong>
+                            Starting at: {{ movie.startTime|date('h:i A') }}
+                        </strong>
                     </p>
+                    <div style="margin-bottom: 16px;">
+                        <h2 style="display:inline;">
+                            <a href="{{ path('movie_details', { 'movie': movie.id }) }}">{{ movie.title }}</a>
+                        </h2>
+                        <span>
+                            <a href="https://imdb.com/title/{{ movie.imdb }}">(IMDb)</a>
+                        </span>
+                    </div>
                     <dl>
-                        <dt>Release Date</dt>
-                        <dd>{{ omdb.getMovie(movie.imdb).Released }}</dd>
+                        <dt>Year</dt>
+                        <dd>{{ omdb.getMovie(movie.imdb).Year }}</dd>
                         <dt>Runtime</dt>
                         <dd>{{ omdb.getMovie(movie.imdb).Runtime }}</dd>
+                        <dt>Director</dt>
+                        <dd>{{ omdb.getMovie(movie.imdb).Director }}</dd>
+                        <dt>Box Office</dt>
+                        <dd>{{ omdb.getMovie(movie.imdb).BoxOffice }}</dd>
                     </dl>
                 </div>
             </li>
