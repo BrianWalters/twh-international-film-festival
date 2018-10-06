@@ -78,4 +78,17 @@ class Comment
 
         return $this;
     }
+
+    public function getTimeRelativeToMovie(Movie $movie)
+    {
+        $intervalFromStartTime = $this->createdAt->diff($movie->getStartTime());
+        $intervalFromEndTime = $this->createdAt->diff($movie->getEndTime());
+
+        if ($this->createdAt->getTimestamp() < $movie->getStartTime()->getTimestamp())
+            return $intervalFromStartTime->format('%i minutes before the movie');
+        else if ($this->createdAt->getTimestamp() < $movie->getEndTime()->getTimestamp())
+            return $intervalFromStartTime->format('%i minutes into the movie');
+        else
+            return $intervalFromEndTime->format('%i minutes after the movie');
+    }
 }

@@ -187,4 +187,26 @@ class Movie
 
         return round($total / sizeof($this->ratings), 1);
     }
+
+    public function isMovieActive()
+    {
+        $now = new \DateTime('now');
+        $isAfterStartTime = $now->getTimestamp() > $this->getStartTime()->getTimestamp();
+        $endTime = $this->getEndTime();
+        $isBeforeRuntime = $now->getTimestamp() < $endTime->getTimestamp();
+        return $isAfterStartTime && $isBeforeRuntime;
+    }
+
+    public function isMovieOver()
+    {
+        $now = new \DateTime('now');
+        return $now->getTimestamp() > $this->getEndTime()->getTimestamp();
+    }
+
+    public function getEndTime()
+    {
+        $endTime = clone $this->getStartTime();
+        $endTime->modify($this->getRuntime() . ' minutes');
+        return $endTime;
+    }
 }

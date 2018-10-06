@@ -1,52 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<main>
-    <div class="jumbotron jumbotron-fluid">
+    <main>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Feast of the Flesh Volume 9</h1>
+                <div class="list-group">
+                    {% for movie in movies %}
+                        <a class="list-group-item list-group-item-action {{ movie.movieActive ? 'active' }} {{ movie.movieOver ? 'list-group-item-light' }}"
+                           href="{{ path('movie_details', {movie:movie.id}) }}">
+                            {{ movie.startTime|date('h:i A') }} – {{ movie.title }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
         <div class="container">
-            <h1 class="display-4">Feast of the Flesh Volume 9</h1>
-            <ul class="list-group">
+            <ul style="padding: 0;">
                 {% for movie in movies %}
-                    <li class="list-group-item">
-                        {{ movie.startTime|date('h:i A') }} - <a href="{{ path('movie_details', {movie:movie.id}) }}">{{ movie.title }}</a>
+                    <li class="row" style="margin-bottom: 24px;">
+                        <div class="col-sm-3">
+                            <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <strong>
+                                    Starting at {{ movie.startTime|date('h:i A') }}
+                                </strong>
+                            </p>
+                            <div style="margin-bottom: 16px;">
+                                <h2 style="display:inline;">
+                                    <a href="{{ path('movie_details', { 'movie': movie.id }) }}">{{ movie.title }}</a>
+                                </h2>
+                                <span>
+                            <a href="https://imdb.com/title/{{ movie.imdb }}">(IMDb)</a>
+                        </span>
+                            </div>
+                            {% include 'partials/movie-info.html.twig' %}
+                        </div>
+                        <div class="col-sm-3 align-self-center">
+                            <dl>
+                                <dt>Average Rating</dt>
+                                <dd>{{ movie.averageRating }} <span class="fa fa-star"></span></dd>
+                            </dl>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
         </div>
-    </div>
-
-    <div class="container">
-        <ul style="padding: 0;">
-            {% for movie in movies %}
-                <li class="row" style="margin-bottom: 24px;">
-                    <div class="col-sm-3">
-                        <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
-                    </div>
-                    <div class="col-sm-6">
-                        <p>
-                            <strong>
-                                Starting at {{ movie.startTime|date('h:i A') }}
-                            </strong>
-                        </p>
-                        <div style="margin-bottom: 16px;">
-                            <h2 style="display:inline;">
-                                <a href="{{ path('movie_details', { 'movie': movie.id }) }}">{{ movie.title }}</a>
-                            </h2>
-                            <span>
-                            <a href="https://imdb.com/title/{{ movie.imdb }}">(IMDb)</a>
-                        </span>
-                        </div>
-                        {% include 'partials/movie-info.html.twig' %}
-                    </div>
-                    <div class="col-sm-3 align-self-center">
-                        <dl>
-                            <dt>Average Rating</dt>
-                            <dd>{{ movie.averageRating }} <span class="fa fa-star"></span></dd>
-                        </dl>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</main>
+    </main>
 {% endblock %}
