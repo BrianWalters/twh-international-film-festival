@@ -26,8 +26,12 @@ class CommentType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('commenter');
-        $builder->add('text');
+        $builder->add('commenter', null, [
+            'label' => 'Your name',
+        ]);
+        $builder->add('text', null, [
+            'label' => 'Your comment',
+        ]);
         $builder->add('movie', HiddenType::class);
         $builder->get('movie')->addModelTransformer($this->movieTransformer);
     }

@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Rating;
 use App\ModelTransformer\MovieTransformer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,14 +23,7 @@ class RatingType extends AbstractType
         $builder->add('rater', null, [
             'label' => 'Your name'
         ]);
-        $builder->add('score', ChoiceType::class, [
-            'choices' => [
-                'half' => 0.5,
-                'one' => 1,
-            ],
-            'multiple' => false,
-            'expanded' => true,
-        ]);
+        $builder->add('score', RatingScoreType::class);
         $builder->add('movie', HiddenType::class);
         $builder->get('movie')->addModelTransformer($this->movieTransformer);
     }

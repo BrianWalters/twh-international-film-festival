@@ -8,6 +8,8 @@ use App\Entity\Movie;
 use App\Entity\Rating;
 use App\Form\CommentType;
 use App\Form\RatingType;
+use App\Repository\CommentRepository;
+use App\Repository\RatingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +21,7 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/{movie}", name="movie_details")
      */
-    public function movieDetailsAction(Request $request, Movie $movie, EntityManagerInterface $entityManager)
+    public function movieDetailsAction(Request $request, Movie $movie, CommentRepository $commentRepository, RatingRepository $ratingRepository)
     {
         $comment = new Comment();
         $comment->setMovie($movie);
@@ -27,6 +29,12 @@ class MovieController extends AbstractController
             'action' => $this->generateUrl('submit_comment'),
         ]);
         $commentForm->handleRequest($request);
+
+        $comments = $commentRepository->findBy([
+            'movie' => $movie
+        ], [
+            'createdAt' => 'DESC'
+        ], 5);
 
         $rating = new Rating();
         $rating->setMovie($movie);
@@ -38,6 +46,7 @@ class MovieController extends AbstractController
         return $this->render('movie.html.twig', [
             'ratingForm' => $ratingForm->createView(),
             'commentForm' => $commentForm->createView(),
+            'comments' => $comments,
             'movie' => $movie,
         ]);
     }
@@ -91,6 +100,23 @@ class MovieController extends AbstractController
 
         return $this->forward('App\Controller\MovieController:movieDetailsAction', [
             'movie' => $rating->getMovie()->getId(),
+        ]);
+    }
+
+    /**
+     * @Route("/movie/{movie}/comments", name="movie_comments")
+     */
+    public function movieComments(Movie $movie, CommentRepository $commentRepository)
+    {
+        $comments = $commentRepository->findBy([
+            'movie' => $movie,
+        ], [
+            'createdAt' => 'DESC'
+        ]);
+
+        return $this->render('page/comments.html.twig', [
+            'comments' => $comments,
+            'movie' => $movie,
         ]);
     }
 }

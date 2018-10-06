@@ -25,6 +25,13 @@
             <div class="col-sm">
                 {% include 'partials/movie-info.html.twig' %}
             </div>
+            <div class="col-sm">
+                <h2>Average Rating</h2>
+                <p class="display-3">
+                    {{ movie.averageRating }}
+                    <span class="fa fa-star" style="font-size: .5em; vertical-align: middle;"></span>
+                </p>
+            </div>
         </div>
 
         <div class="row">
@@ -41,6 +48,10 @@
                     {% endfor %}
                 </ul>
 
+                <hr>
+
+                <h3>Submit a rating</h3>
+
                 {{ form_start(ratingForm) }}
                 {{ form_widget(ratingForm) }}
                 <p>
@@ -52,20 +63,20 @@
             <div class="col-sm">
                 <h2>Comments</h2>
 
-                {% for comment in movie.comments %}
-                    <div class="card" style="margin-bottom: 24px;">
-                        <div class="card-header">
-                            By <strong>{{ comment.commenter }}</strong>
-                        </div>
-                        <div class="card-body">
-                            <p>
-                                {{ comment.text }}
-                            </p>
-                        </div>
+                {% if comments %}
+                    {% for comment in comments %}
+                        {% include 'partials/comment.html.twig' %}
+                    {% endfor %}
+                    <div>
+                        <a href="{{ path('movie_comments', {movie:movie.id}) }}">See all comments ({{ movie.comments|length }})</a>
                     </div>
                 {% else %}
                     <p>No comments yet!</p>
-                {% endfor %}
+                {% endif %}
+
+                <hr>
+
+                <h3>Submit a comment</h3>
 
                 {{ form_start(commentForm) }}
                 {{ form_widget(commentForm) }}

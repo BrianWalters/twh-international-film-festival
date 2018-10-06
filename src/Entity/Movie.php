@@ -46,12 +46,12 @@ class Movie
     private $runtime;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Rating", mappedBy="movie", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Rating", mappedBy="movie", orphanRemoval=true, fetch="EXTRA_LAZY")
      */
     private $ratings;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="movie", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="movie", orphanRemoval=true, fetch="EXTRA_LAZY")
      */
     private $comments;
 
@@ -174,5 +174,17 @@ class Movie
         }
 
         return $this;
+    }
+
+    public function getAverageRating()
+    {
+        if (sizeof($this->ratings) === 0)
+            return 0;
+
+        $total = array_reduce($this->ratings->toArray(), function($carry, Rating $rating) {
+            return $carry + $rating->getScore();
+        }, 0);
+
+        return round($total / sizeof($this->ratings), 1);
     }
 }

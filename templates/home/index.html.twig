@@ -22,7 +22,7 @@
                     <div class="col-sm-3">
                         <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-6">
                         <p>
                             <strong>
                                 Starting at {{ movie.startTime|date('h:i A') }}
@@ -37,6 +37,12 @@
                         </span>
                         </div>
                         {% include 'partials/movie-info.html.twig' %}
+                    </div>
+                    <div class="col-sm-3 align-self-center">
+                        <dl>
+                            <dt>Average Rating</dt>
+                            <dd>{{ movie.averageRating }} <span class="fa fa-star"></span></dd>
+                        </dl>
                     </div>
                 </li>
             {% endfor %}

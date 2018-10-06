@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comments for {{ movie.title }}{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h1>Comments for <a href="{{ path('movie_details', {movie:movie.id}) }}">{{ movie.title }}</a></h1>
+                {% for comment in comments %}
+                    {% include 'partials/comment.html.twig' %}
+                {% endfor %}
+                <p>
+                    <a href="{{ path('movie_details', {movie:movie.id}) }}">Back to movie</a>
+                </p>
+            </div>
+        </div>
+    </main>
+{% endblock %}

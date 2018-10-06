@@ -22,7 +22,7 @@ class Rating
 
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Choose a rating!")
      * @Assert\Range(min="0", max="4")
      */
     private $score;
@@ -44,14 +44,14 @@ class Rating
         return $this->id;
     }
 
-    public function getScore(): ?int
+    public function getScore(): ?float
     {
         return $this->score;
     }
 
-    public function setScore(?int $score): self
+    public function setScore(?float $score): self
     {
-        $this->score = $score;
+        $this->score = (float)$score;
 
         return $this;
     }
