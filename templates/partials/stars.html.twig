@@ -1,0 +1,29 @@
+{% if rating.score == 4 %}
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+{% elseif rating.score == 3.5 %}
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star-half"></span>
+{% elseif rating.score == 3 %}
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+{% elseif rating.score == 2.5 %}
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star-half"></span>
+{% elseif rating.score == 2 %}
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+{% elseif rating.score == 1.5 %}
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star-half"></span>
+{% elseif rating.score == 1 %}
+    <span class="fa fa-star"></span>
+{% elseif rating.score == 0.5 %}
+    <span class="fa fa-star-half"></span>
+{% endif %}

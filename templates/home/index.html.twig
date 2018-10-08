@@ -7,9 +7,16 @@
                 <h1 class="display-4">Feast of the Flesh Volume 9</h1>
                 <div class="list-group">
                     {% for movie in movies %}
-                        <a class="list-group-item list-group-item-action {{ movie.movieActive ? 'active' }} {{ movie.movieOver ? 'list-group-item-light' }}"
+                        <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }}"
+                           style="display: flex; align-items: center;"
                            href="{{ path('movie_details', {movie:movie.id}) }}">
                             {{ movie.startTime|date('h:i A') }} – {{ movie.title }}
+                            {% if movie.movieOver %}
+                                <span style="margin-left: auto" class="fa fa-check"></span>
+                            {% endif %}
+                            {% if movie.movieActive %}
+                                <span style="margin-left: auto" class="fa fa-play"></span>
+                            {% endif %}
                         </a>
                     {% endfor %}
                 </div>
@@ -21,7 +28,9 @@
                 {% for movie in movies %}
                     <li class="row" style="margin-bottom: 24px;">
                         <div class="col-sm-3">
-                            <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
+                            <a href="{{ path('movie_details', {movie:movie.id}) }}">
+                                <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
+                            </a>
                         </div>
                         <div class="col-sm-6">
                             <p>
@@ -34,7 +43,9 @@
                                     <a href="{{ path('movie_details', { 'movie': movie.id }) }}">{{ movie.title }}</a>
                                 </h2>
                                 <span>
-                            <a href="https://imdb.com/title/{{ movie.imdb }}">(IMDb)</a>
+                                <a href="https://imdb.com/title/{{ movie.imdb }}" target="_blank">
+                                    (IMDb <span class="fa fa-external-link-alt"></span>)
+                                </a>
                         </span>
                             </div>
                             {% include 'partials/movie-info.html.twig' %}

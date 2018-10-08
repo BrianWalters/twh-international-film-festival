@@ -10,7 +10,9 @@
                 <div style="margin-bottom: 24px;">
                     <h1 style="display:inline;">{{ movie.title }}</h1>
                     <span>
-                        <a href="https://imdb.com/title/{{ movie.imdb }}">(IMDb)</a>
+                        <a href="https://imdb.com/title/{{ movie.imdb }}">
+                            (IMDb <span class="fa fa-external-link-alt"></span>)
+                        </a>
                     </span>
                 </div>
             </div>
@@ -41,7 +43,7 @@
                 <ul class="list-group">
                     {% for rating in movie.ratings %}
                         <li class="list-group-item">
-                            {{ rating.score }} by <strong>{{ rating.rater }}</strong>
+                            {% include 'partials/stars.html.twig' %} by <strong>{{ rating.rater }}</strong>
                         </li>
                     {% else %}
                         <li class="list-group-item">No ratings yet!</li>

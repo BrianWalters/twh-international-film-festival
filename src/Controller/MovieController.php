@@ -111,7 +111,7 @@ class MovieController extends AbstractController
         $comments = $commentRepository->findBy([
             'movie' => $movie,
         ], [
-            'createdAt' => 'DESC'
+            'createdAt' => 'ASC'
         ]);
 
         return $this->render('page/comments.html.twig', [
