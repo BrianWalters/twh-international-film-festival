@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import 'partials/stars.html.twig' as stars %}
+
 {% block title %}Feast of the Flesh | {{ movie.title }}{% endblock %}
 
 {% block body %}
@@ -29,9 +31,11 @@
             </div>
             <div class="col-sm">
                 <h2>Average Rating</h2>
-                <p class="display-3">
+                <p class="display-3" style="display: flex; align-items: center;">
                     {{ movie.averageRating }}
-                    <span class="fa fa-star" style="font-size: .5em; vertical-align: middle;"></span>
+                    <span style="font-size: 0.5em; margin-left: 0.5em;">
+                        {{ stars.stars(movie.averageRating) }}
+                    </span>
                 </p>
             </div>
         </div>
@@ -43,7 +47,7 @@
                 <ul class="list-group">
                     {% for rating in movie.ratings %}
                         <li class="list-group-item">
-                            {% include 'partials/stars.html.twig' %} by <strong>{{ rating.rater }}</strong>
+                            {{ stars.stars(rating.score) }} by <strong>{{ rating.rater }}</strong>
                         </li>
                     {% else %}
                         <li class="list-group-item">No ratings yet!</li>
