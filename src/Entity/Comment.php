@@ -84,11 +84,28 @@ class Comment
         $intervalFromStartTime = $this->createdAt->diff($movie->getStartTime());
         $intervalFromEndTime = $this->createdAt->diff($movie->getEndTime());
 
+        $startTimeIntervalString = $this->makeIntervalTimeString($intervalFromStartTime);
+        $endTimeIntervalString = $this->makeIntervalTimeString($intervalFromEndTime);
+
         if ($this->createdAt->getTimestamp() < $movie->getStartTime()->getTimestamp())
-            return $intervalFromStartTime->format('%i minutes before the movie');
+            return $startTimeIntervalString . ' before the movie';
         else if ($this->createdAt->getTimestamp() < $movie->getEndTime()->getTimestamp())
-            return $intervalFromStartTime->format('%i minutes into the movie');
+            return $startTimeIntervalString . ' into the movie';
         else
-            return $intervalFromEndTime->format('%i minutes after the movie');
+            return $endTimeIntervalString . ' after the movie';
+    }
+
+    private function makeIntervalTimeString(\DateInterval $interval)
+    {
+        $intervalString = '';
+        if ($interval->days > 0)
+            $intervalString .= $interval->format('%a days ');
+
+        if ($interval->h > 0)
+            $intervalString .= $interval->format('%h hours ');
+
+        $intervalString .= $interval->format('%i minutes');
+
+        return $intervalString;
     }
 }
