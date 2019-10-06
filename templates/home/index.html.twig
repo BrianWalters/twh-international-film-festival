@@ -63,6 +63,19 @@
                                         No ratings yet!
                                     {% endif %}
                                 </dd>
+                                <dt>
+                                    Comments
+                                </dt>
+                                <dd>
+                                    {% if movie.comments|length %}
+                                        <a href="{{ path('movie_comments', { movie: movie.id }) }}">
+                                            {{ movie.comments|length }}
+                                            <span class="fa fa-comment"></span>
+                                        </a>
+                                    {% else %}
+                                        No comments yet!
+                                    {% endif %}
+                                </dd>
                             </dl>
                         </div>
                     </li>
