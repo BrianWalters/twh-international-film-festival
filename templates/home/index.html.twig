@@ -3,13 +3,13 @@
 {% import 'partials/stars.html.twig' as stars %}
 
 {% block body %}
-    <main>
-        <div class="jumbotron jumbotron-fluid">
+    <main class="bg-dark text-light">
+        <div class="jumbotron jumbotron-fluid bg-dark text-light">
             <div class="container">
-                <h1 class="display-4">Feast of the Flesh Volume X</h1>
+                <h1 class="display-4 text-center mb-3">Feast of the Flesh Volume X</h1>
                 <div class="list-group">
                     {% for movie in movies %}
-                        <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }}"
+                        <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }} bg-darkest text-orange"
                            style="display: flex; align-items: center;"
                            href="{{ path('movie_details', {movie:movie.id}) }}">
                             {{ movie.startTime|date('h:i A') }} – {{ movie.title }}

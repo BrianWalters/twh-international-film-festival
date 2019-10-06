@@ -1,0 +1,24 @@
+a {
+    color: var(--orange);
+    transition: color 250ms ease;
+}
+
+a:hover, a:focus {
+    color: var(--red);
+}
+
+.bg-darkest {
+    background-color: #222222 !important;
+}
+
+.bg-darkest.list-group-item {
+    border-color: var(--light);
+}
+
+.bg-darkest.list-group-item:hover {
+    background-color: #111111 !important;
+}
+
+.text-orange {
+    color: var(--orange) !important;
+}
