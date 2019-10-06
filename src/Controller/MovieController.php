@@ -94,7 +94,7 @@ class MovieController extends AbstractController
 
         $movie = $rating->getMovie();
         if ($dateProvider->getToday() < $movie->getStartTime()) {
-            $this->addFlash('error', "You can't add a rating before you've seen the movie you god damn tosser!");
+            $this->addFlash('error', "You can't add a rating before you've seen the movie you fucking tosser!");
             return $this->redirectToRoute('movie_details', [
                 'movie' => $movie->getId(),
             ]);
