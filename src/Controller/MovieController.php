@@ -9,9 +9,10 @@ use App\Entity\Rating;
 use App\Form\CommentType;
 use App\Form\RatingType;
 use App\Repository\CommentRepository;
-use App\Repository\RatingRepository;
+use App\Service\DateProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,7 +22,9 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/{movie}", name="movie_details")
      */
-    public function movieDetailsAction(Request $request, Movie $movie, CommentRepository $commentRepository)
+    public function movieDetailsAction(Request $request,
+                                       Movie $movie,
+                                       CommentRepository $commentRepository)
     {
         $comment = new Comment();
         $comment->setMovie($movie);
@@ -31,8 +34,8 @@ class MovieController extends AbstractController
         $commentForm->handleRequest($request);
 
         $comments = $commentRepository->findBy(
-            [ 'movie' => $movie ],
-            [ 'createdAt' => 'DESC' ],
+            ['movie' => $movie],
+            ['createdAt' => 'DESC'],
             5
         );
 
@@ -80,19 +83,29 @@ class MovieController extends AbstractController
     /**
      * @Route("/rating", name="submit_rating", methods={"POST"})
      */
-    public function submitRating(Request $request, EntityManagerInterface $entityManager)
+    public function submitRating(Request $request,
+                                 EntityManagerInterface $entityManager,
+                                 DateProvider $dateProvider)
     {
         $rating = new Rating();
 
         $ratingForm = $this->createForm(RatingType::class, $rating);
         $ratingForm->handleRequest($request);
 
+        $movie = $rating->getMovie();
+        if ($dateProvider->getToday() < $movie->getStartTime()) {
+            $this->addFlash('error', "You can't add a rating before you've seen the movie you god damn tosser!");
+            return $this->redirectToRoute('movie_details', [
+                'movie' => $movie->getId(),
+            ]);
+        }
+
         if ($ratingForm->isSubmitted() && $ratingForm->isValid()) {
             $entityManager->persist($rating);
             $entityManager->flush();
             $this->addFlash('notice', 'Your rating was added.');
             return $this->redirectToRoute('movie_details', [
-                'movie' => $rating->getMovie()->getId(),
+                'movie' => $movie->getId(),
             ]);
         }
 
