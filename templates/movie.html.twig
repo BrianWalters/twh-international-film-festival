@@ -31,12 +31,16 @@
             </div>
             <div class="col-sm">
                 <h2>Average Rating</h2>
-                <p class="display-3" style="display: flex; align-items: center;">
-                    {{ movie.averageRating }}
-                    <span style="font-size: 0.5em; margin-left: 0.5em;">
-                        {{ stars.stars(movie.averageRating) }}
-                    </span>
-                </p>
+                    {% if movie.ratings|length > 0 %}
+                        <p class="display-3" style="display: flex; align-items: center;">
+                            {{ movie.averageRating }}
+                            <span style="font-size: 0.5em; margin-left: 0.5em;">
+                                {{ stars.stars(movie.averageRating) }}
+                            </span>
+                        </p>
+                    {% else %}
+                        <p>No ratings yet!</p>
+                    {% endif %}
             </div>
         </div>
 
@@ -54,16 +58,16 @@
                     {% endfor %}
                 </ul>
 
-                {#<hr>#}
+                <hr>
 
-                {#<h3>Submit a rating</h3>#}
+                <h3>Submit a rating</h3>
 
-                {#{{ form_start(ratingForm) }}#}
-                {#{{ form_widget(ratingForm) }}#}
-                {#<p>#}
-                    {#<button class="btn btn-primary" type="submit" formnovalidate>Submit</button>#}
-                {#</p>#}
-                {#{{ form_end(ratingForm) }}#}
+                {{ form_start(ratingForm) }}
+                {{ form_widget(ratingForm) }}
+                <p>
+                    <button class="btn btn-primary" type="submit" formnovalidate>Submit</button>
+                </p>
+                {{ form_end(ratingForm) }}
             </div>
 
             <div class="col-sm">
@@ -80,16 +84,16 @@
                     <p>No comments yet!</p>
                 {% endif %}
 
-                {#<hr>#}
+                <hr>
 
-                {#<h3>Submit a comment</h3>#}
+                <h3>Submit a comment</h3>
 
-                {#{{ form_start(commentForm) }}#}
-                {#{{ form_widget(commentForm) }}#}
-                {#<p>#}
-                    {#<button class="btn btn-primary" type="submit" formnovalidate>Submit</button>#}
-                {#</p>#}
-                {#{{ form_end(commentForm) }}#}
+                {{ form_start(commentForm) }}
+                {{ form_widget(commentForm) }}
+                <p>
+                    <button class="btn btn-primary" type="submit" formnovalidate>Submit</button>
+                </p>
+                {{ form_end(commentForm) }}
             </div>
         </div>
 

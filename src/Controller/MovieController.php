@@ -21,31 +21,31 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/{movie}", name="movie_details")
      */
-    public function movieDetailsAction(Movie $movie, CommentRepository $commentRepository)
+    public function movieDetailsAction(Request $request, Movie $movie, CommentRepository $commentRepository)
     {
         $comment = new Comment();
         $comment->setMovie($movie);
-//        $commentForm = $this->createForm(CommentType::class, $comment, [
-//            'action' => $this->generateUrl('submit_comment'),
-//        ]);
-//        $commentForm->handleRequest($request);
+        $commentForm = $this->createForm(CommentType::class, $comment, [
+            'action' => $this->generateUrl('submit_comment'),
+        ]);
+        $commentForm->handleRequest($request);
 
-        $comments = $commentRepository->findBy([
-            'movie' => $movie
-        ], [
-            'createdAt' => 'DESC'
-        ], 5);
+        $comments = $commentRepository->findBy(
+            [ 'movie' => $movie ],
+            [ 'createdAt' => 'DESC' ],
+            5
+        );
 
         $rating = new Rating();
         $rating->setMovie($movie);
-//        $ratingForm = $this->createForm(RatingType::class, $rating, [
-//            'action' => $this->generateUrl('submit_rating'),
-//        ]);
-//        $ratingForm->handleRequest($request);
+        $ratingForm = $this->createForm(RatingType::class, $rating, [
+            'action' => $this->generateUrl('submit_rating'),
+        ]);
+        $ratingForm->handleRequest($request);
 
         return $this->render('movie.html.twig', [
-//            'ratingForm' => $ratingForm->createView(),
-//            'commentForm' => $commentForm->createView(),
+            'ratingForm' => $ratingForm->createView(),
+            'commentForm' => $commentForm->createView(),
             'comments' => $comments,
             'movie' => $movie,
         ]);
