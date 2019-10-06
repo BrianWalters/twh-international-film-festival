@@ -72,3 +72,10 @@ a.bg-darkest.list-group-item:hover {
     border-color: var(--light);
     color: #fff;
 }
+
+/* Antispam bundle */
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+}
