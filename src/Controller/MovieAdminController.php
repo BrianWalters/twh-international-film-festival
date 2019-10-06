@@ -18,16 +18,22 @@ class MovieAdminController extends AbstractController
     /**
      * @Route("/", name="movie_index", methods="GET")
      */
-    public function index(MovieRepository $movieRepository): Response
+    public function index(MovieRepository $movieRepository, $adminEnabled): Response
     {
+        if (!$adminEnabled)
+            throw $this->createAccessDeniedException();
+
         return $this->render('movie/index.html.twig', ['movies' => $movieRepository->findAll()]);
     }
 
     /**
      * @Route("/new", name="movie_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, $adminEnabled): Response
     {
+        if (!$adminEnabled)
+            throw $this->createAccessDeniedException();
+
         $movie = new Movie();
         $form = $this->createForm(MovieType::class, $movie);
         $form->handleRequest($request);
@@ -49,16 +55,22 @@ class MovieAdminController extends AbstractController
     /**
      * @Route("/{id}", name="movie_show", methods="GET")
      */
-    public function show(Movie $movie): Response
+    public function show(Movie $movie, $adminEnabled): Response
     {
+        if (!$adminEnabled)
+            throw $this->createAccessDeniedException();
+
         return $this->render('movie/show.html.twig', ['movie' => $movie]);
     }
 
     /**
      * @Route("/{id}/edit", name="movie_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Movie $movie): Response
+    public function edit(Request $request, Movie $movie, $adminEnabled): Response
     {
+        if (!$adminEnabled)
+            throw $this->createAccessDeniedException();
+
         $form = $this->createForm(MovieType::class, $movie);
         $form->handleRequest($request);
 
@@ -77,8 +89,11 @@ class MovieAdminController extends AbstractController
     /**
      * @Route("/{id}", name="movie_delete", methods="DELETE")
      */
-    public function delete(Request $request, Movie $movie): Response
+    public function delete(Request $request, Movie $movie, $adminEnabled): Response
     {
+        if (!$adminEnabled)
+            throw $this->createAccessDeniedException();
+
         if ($this->isCsrfTokenValid('delete'.$movie->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($movie);

@@ -4,7 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    env(ADMIN_ENABLED): false
     locale: 'en'
+    adminEnabled: '%env(bool:ADMIN_ENABLED)%'
 
 services:
     # default configuration for services in *this* file
@@ -14,6 +16,7 @@ services:
         public: false
         bind:
             $OMDBAPIKey: '%env(OMDB_API_KEY)%'
+            $adminEnabled: '%adminEnabled%'
 
     App\Client\OMDBClient: '@eight_points_guzzle.client.omdb_client'
 
