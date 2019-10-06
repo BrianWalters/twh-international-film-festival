@@ -1,3 +1,5 @@
+/* RESET THE RESET */
+
 a {
     color: var(--orange);
     transition: color 250ms ease;
@@ -7,18 +9,66 @@ a:hover, a:focus {
     color: var(--red);
 }
 
+/* COLOR UTILITIES */
 .bg-darkest {
     background-color: #222222 !important;
+}
+
+.text-orange {
+    color: var(--orange) !important;
+}
+
+/* FORM */
+.form-control {
+    border-radius: 0;
+}
+
+/* OVERRIDING COMPONENTS */
+.card {
+    border-radius: 0;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .bg-darkest.list-group-item {
     border-color: var(--light);
 }
 
-.bg-darkest.list-group-item:hover {
+a.bg-darkest.list-group-item:hover {
     background-color: #111111 !important;
 }
 
-.text-orange {
-    color: var(--orange) !important;
+.bg-darkest.card {
+    background-color: #222222 !important;
+    border-color: var(--light);
+}
+
+.bg-darkest.card .card-header {
+    background-color: #111111 !important;
+    border-color: var(--light);
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.btn-orange {
+    background-color: var(--orange);
+    border-color: var(--light);
+    color: #fff;
+    transition: background-color 250ms ease, border-color 250ms ease;
+}
+
+.btn-orange:hover {
+    background-color: var(--red);
+    border-color: var(--light);
+    color: #fff;
 }

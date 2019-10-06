@@ -21,7 +21,10 @@ class RatingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('rater', null, [
-            'label' => 'Your name'
+            'label' => 'Your name',
+            'attr' => [
+                'class' => 'bg-dark text-light',
+            ],
         ]);
         $builder->add('score', RatingScoreType::class);
         $builder->add('movie', HiddenType::class);

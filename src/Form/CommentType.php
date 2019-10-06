@@ -28,9 +28,15 @@ class CommentType extends AbstractType
     {
         $builder->add('commenter', null, [
             'label' => 'Your name',
+            'attr' => [
+                'class' => 'bg-dark text-light',
+            ],
         ]);
         $builder->add('text', null, [
             'label' => 'Your comment',
+            'attr' => [
+                'class' => 'bg-dark text-light',
+            ],
         ]);
         $builder->add('movie', HiddenType::class);
         $builder->get('movie')->addModelTransformer($this->movieTransformer);
