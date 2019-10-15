@@ -76,6 +76,21 @@
                                         No comments yet!
                                     {% endif %}
                                 </dd>
+                                {% if movie.lukeBit or movie.joannaBit %}
+                                    <div style="position: relative;">
+                                        {% if movie.lukeBit %}
+                                            <button class="bit-button" type="button" aria-controls="bit-luke-{{ movie.id }}">
+                                                <img src="{{ asset('images/luke-1.png') }}" alt="Luke" width="33" height="50">
+                                            </button>
+                                            <div class="bit" id="bit-luke-{{ movie.id }}" aria-expanded="false">
+                                                <button class="bit-close-button" type="button" aria-controls="bit-luke-{{ movie.id }}">
+                                                    <span class="fa fa-times"></span>
+                                                </button>
+                                                {{ movie.lukeBit|nl2br }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
                             </dl>
                         </div>
                     </li>
@@ -83,4 +98,9 @@
             </ul>
         </div>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/bit-button.js') }}"></script>
 {% endblock %}
