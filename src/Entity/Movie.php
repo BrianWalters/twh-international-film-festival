@@ -55,6 +55,16 @@ class Movie
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $lukeBit;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $joannaBit;
+
     public function __construct()
     {
         $this->ratings = new ArrayCollection();
@@ -208,5 +218,29 @@ class Movie
         $endTime = clone $this->getStartTime();
         $endTime->modify($this->getRuntime() . ' minutes');
         return $endTime;
+    }
+
+    public function getLukeBit(): ?string
+    {
+        return $this->lukeBit;
+    }
+
+    public function setLukeBit(?string $lukeBit): self
+    {
+        $this->lukeBit = $lukeBit;
+
+        return $this;
+    }
+
+    public function getJoannaBit(): ?string
+    {
+        return $this->joannaBit;
+    }
+
+    public function setJoannaBit(?string $joannaBit): self
+    {
+        $this->joannaBit = $joannaBit;
+
+        return $this;
     }
 }
