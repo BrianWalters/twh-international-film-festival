@@ -35,8 +35,17 @@ class GenerateCommand extends Command
      * @var CommentRepository
      */
     private $commentRepository;
+    /**
+     * @var bool
+     */
+    private $readOnly;
 
-    public function __construct(?string $name = null, HomeController $homeController, MovieRepository $movieRepository, MovieController $movieController, CommentRepository $commentRepository)
+    public function __construct(?string $name = null,
+                                HomeController $homeController,
+                                MovieRepository $movieRepository,
+                                MovieController $movieController,
+                                CommentRepository $commentRepository,
+                                $readOnly = false)
     {
         parent::__construct($name);
         $this->homeController = $homeController;
@@ -44,6 +53,7 @@ class GenerateCommand extends Command
         $this->filesystem = new Filesystem();
         $this->movieController = $movieController;
         $this->commentRepository = $commentRepository;
+        $this->readOnly = $readOnly;
     }
 
     protected function configure()
@@ -55,14 +65,18 @@ class GenerateCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $this->clean();
-        $this->copyStatic();
+        if ($this->readOnly) {
+            $io->text('Generating site in read only mode.');
+            $this->clean();
+            $this->copyStatic();
 
-        $this->generateHome();
-        $this->generateMovies();
-        $this->generateComments();
+            $this->generateHome();
+            $this->generateMovies();
+            $this->generateComments();
 
-        $io->success('Done.');
+            $io->success('Done.');
+        } else
+            $io->error('This command only makes sense if the site is in read only mode.');
     }
 
     private function generateHome()
