@@ -58,16 +58,18 @@
                     {% endfor %}
                 </ul>
 
-                <hr>
+                {% if not readOnly %}
+                    <hr>
 
-                <h3>Submit a rating</h3>
+                    <h3>Submit a rating</h3>
 
-                {{ form_start(ratingForm) }}
-                {{ form_widget(ratingForm) }}
-                <p>
-                    <button class="btn btn-orange" type="submit" formnovalidate>Submit</button>
-                </p>
-                {{ form_end(ratingForm) }}
+                    {{ form_start(ratingForm) }}
+                    {{ form_widget(ratingForm) }}
+                    <p>
+                        <button class="btn btn-orange" type="submit" formnovalidate>Submit</button>
+                    </p>
+                    {{ form_end(ratingForm) }}
+                {% endif %}
             </div>
 
             <div class="col-sm">
@@ -84,16 +86,18 @@
                     <p>No comments yet!</p>
                 {% endif %}
 
-                <hr>
+                {% if not readOnly %}
+                    <hr>
 
-                <h3>Submit a comment</h3>
+                    <h3>Submit a comment</h3>
 
-                {{ form_start(commentForm) }}
-                {{ form_widget(commentForm) }}
-                <p>
-                    <button class="btn btn-orange" type="submit" formnovalidate>Submit</button>
-                </p>
-                {{ form_end(commentForm) }}
+                    {{ form_start(commentForm) }}
+                    {{ form_widget(commentForm) }}
+                    <p>
+                        <button class="btn btn-orange" type="submit" formnovalidate>Submit</button>
+                    </p>
+                    {{ form_end(commentForm) }}
+                {% endif %}
             </div>
         </div>
 

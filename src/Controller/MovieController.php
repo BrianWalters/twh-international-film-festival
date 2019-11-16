@@ -22,16 +22,18 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/{movie}", name="movie_details")
      */
-    public function movieDetailsAction(Request $request,
-                                       Movie $movie,
-                                       CommentRepository $commentRepository)
+    public function movieDetailsAction(Movie $movie,
+                                       CommentRepository $commentRepository,
+                                       ?Request $request = null)
     {
         $comment = new Comment();
         $comment->setMovie($movie);
         $commentForm = $this->createForm(CommentType::class, $comment, [
             'action' => $this->generateUrl('submit_comment'),
         ]);
-        $commentForm->handleRequest($request);
+
+        if ($request)
+            $commentForm->handleRequest($request);
 
         $comments = $commentRepository->findBy(
             ['movie' => $movie],
@@ -44,7 +46,9 @@ class MovieController extends AbstractController
         $ratingForm = $this->createForm(RatingType::class, $rating, [
             'action' => $this->generateUrl('submit_rating'),
         ]);
-        $ratingForm->handleRequest($request);
+
+        if ($request)
+            $ratingForm->handleRequest($request);
 
         return $this->render('movie.html.twig', [
             'ratingForm' => $ratingForm->createView(),

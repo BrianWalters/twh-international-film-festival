@@ -7,3 +7,4 @@ twig:
         - 'rating_widget.html.twig'
     globals:
         omdb: '@App\OMDB\API'
+        readOnly: '%read_only%'

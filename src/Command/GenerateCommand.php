@@ -56,7 +56,7 @@ class GenerateCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $this->clean();
-        $this->copyBootstrap();
+        $this->copyStatic();
 
         $this->generateHome();
         $this->generateMovies();
@@ -102,8 +102,12 @@ class GenerateCommand extends Command
         $this->filesystem->remove('build/*');
     }
 
-    private function copyBootstrap()
+    private function copyStatic()
     {
-        $this->filesystem->mirror('public/bootstrap-4.0.0-dist', 'build/bootstrap-4.0.0-dist');
+        $this->filesystem->mirror('public/bootstrap-4.3.1-dist', 'build/bootstrap-4.3.1-dist');
+        $this->filesystem->mirror('public/fontawesome-free-5.11.2-web', 'build/fontawesome-free-5.11.2-web');
+        $this->filesystem->mirror('public/images', 'build/images');
+        $this->filesystem->mirror('public/js', 'build/js');
+        $this->filesystem->mirror('public/custom.css', 'build/custom.css');
     }
 }
