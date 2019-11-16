@@ -99,7 +99,7 @@ class GenerateCommand extends Command
 
     private function clean()
     {
-        $this->filesystem->remove('build/*');
+        $this->filesystem->remove('build');
     }
 
     private function copyStatic()
@@ -108,6 +108,6 @@ class GenerateCommand extends Command
         $this->filesystem->mirror('public/fontawesome-free-5.11.2-web', 'build/fontawesome-free-5.11.2-web');
         $this->filesystem->mirror('public/images', 'build/images');
         $this->filesystem->mirror('public/js', 'build/js');
-        $this->filesystem->mirror('public/custom.css', 'build/custom.css');
+        $this->filesystem->copy('public/custom.css', 'build/custom.css');
     }
 }
