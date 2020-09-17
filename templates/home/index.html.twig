@@ -6,13 +6,13 @@
     <main>
         <div class="jumbotron jumbotron-fluid bg-dark text-light">
             <div class="container">
-                <h1 class="display-4 text-center mb-3">Feast of the Flesh Volume 10</h1>
+                <h1 class="display-4 text-center mb-3">Feast of the Flesh Volume 11</h1>
                 <div class="list-group">
                     {% for movie in movies %}
                         <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }} bg-darkest text-orange"
                            style="display: flex; align-items: center;"
                            href="{{ path('movie_details', {movie:movie.id}) }}">
-                            {{ movie.startTime|date('h:i A') }} – {{ movie.title }}
+                            {{ movie.startTime|date('M j, g:i A') }} – {{ movie.title }}
                             {% if movie.movieOver %}
                                 <span style="margin-left: auto" class="fa fa-check"></span>
                             {% endif %}
