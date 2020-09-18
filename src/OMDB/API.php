@@ -47,8 +47,12 @@ class API
         return $item->get();
     }
 
-    public function getPosterURL($id)
+    public function getPosterURL($id): string
     {
+        $movie = $this->getMovie($id);
+        if (isset($movie['Poster']))
+            return $movie['Poster'];
+
         return "http://img.omdbapi.com/?apikey=$this->APIKey&i=$id";
     }
 }
