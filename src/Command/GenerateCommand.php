@@ -118,7 +118,7 @@ class GenerateCommand extends Command
 
     private function copyStatic()
     {
-        $this->filesystem->mirror('public/bootstrap-4.3.1-dist', 'build/bootstrap-4.3.1-dist');
+        $this->filesystem->mirror('public/bootstrap-4.5.2-dist', 'build/bootstrap-4.5.2-dist');
         $this->filesystem->mirror('public/fontawesome-free-5.11.2-web', 'build/fontawesome-free-5.11.2-web');
         $this->filesystem->mirror('public/images', 'build/images');
         $this->filesystem->mirror('public/js', 'build/js');
