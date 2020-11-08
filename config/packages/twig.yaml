@@ -8,3 +8,4 @@ twig:
     globals:
         omdb: '@App\OMDB\API'
         readOnly: '%read_only%'
+        footer: '@App\Service\Footer'
