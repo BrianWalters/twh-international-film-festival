@@ -2,7 +2,7 @@
 
 build/*
 
-.env*local
+*.local
 
 ###> symfony/framework-bundle ###
 /.env
