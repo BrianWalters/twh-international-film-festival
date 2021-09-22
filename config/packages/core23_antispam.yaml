@@ -1,6 +1,0 @@
-core23_antispam:
-    time:
-        min: 5
-        global: true
-    honeypot:
-        global: true

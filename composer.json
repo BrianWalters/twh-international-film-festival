@@ -2,12 +2,17 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.1.3",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "core23/antispam-bundle": "^1.1",
+        "composer/package-versions-deprecated": "1.11.99.4",
+        "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^2.4",
+        "doctrine/doctrine-migrations-bundle": "^3.1",
+        "doctrine/orm": "^2.9",
         "eightpoints/guzzle-bundle": "^7.3",
+        "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^5.1",
         "stof/doctrine-extensions-bundle": "^1.3",
         "symfony/apache-pack": "^1.0",
@@ -18,10 +23,10 @@
         "symfony/form": "*",
         "symfony/framework-bundle": "*",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/orm-pack": "*",
         "symfony/process": "*",
+        "symfony/proxy-manager-bridge": "*",
         "symfony/security-bundle": "*",
-        "symfony/serializer-pack": "*",
+        "symfony/serializer": "*",
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
@@ -29,11 +34,14 @@
         "symfony/yaml": "*"
     },
     "require-dev": {
-        "symfony/debug-pack": "*",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "*",
+        "symfony/css-selector": "*",
+        "symfony/debug-bundle": "*",
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*",
+        "symfony/phpunit-bridge": "^5.3",
+        "symfony/web-profiler-bundle": "*",
         "symfony/web-server-bundle": "*"
     },
     "config": {
@@ -78,7 +86,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.3.*"
+            "require": "4.4.*"
         }
     }
 }
