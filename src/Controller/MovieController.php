@@ -9,6 +9,7 @@ use App\Entity\Rating;
 use App\Form\CommentType;
 use App\Form\RatingType;
 use App\Repository\CommentRepository;
+use App\Repository\MovieRepository;
 use App\Service\DateProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -135,5 +136,17 @@ class MovieController extends AbstractController
             'comments' => $comments,
             'movie' => $movie,
         ]);
+    }
+
+    /**
+     * @Route("/past", name="movie_past_index")
+     */
+    public function pastIndex(MovieRepository $movieRepository)
+    {
+        $currentYear = $year = (int)(new \DateTime('now'))->format('Y');
+
+        $movies = $movieRepository->groupByYear();
+
+        dd($movies);
     }
 }

@@ -14,12 +14,20 @@ class HomeController extends AbstractController
      */
     public function index(MovieRepository $movieRepository, API $api)
     {
-        $movies = $movieRepository->findBy([], [
-            'startTime' => 'ASC'
-        ]);
+        $year = (int)(new \DateTime('now'))->format('Y');
+
+        $movies = $movieRepository->findBy(
+            [
+                'yearFeasted' => $year,
+            ],
+            [
+                'startTime' => 'ASC',
+            ]
+        );
 
         return $this->render('home/index.html.twig', [
             'movies' => $movies,
+            'volumeNumber' => $year - 2009,
         ]);
     }
 }

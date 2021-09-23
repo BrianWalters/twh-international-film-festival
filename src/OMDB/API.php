@@ -36,7 +36,7 @@ class API
             ]);
 
             $data = json_decode($response->getBody()->getContents(), true);
-            $item->expiresAfter(\DateInterval::createFromDateString('24 hours'));
+            $item->expiresAfter(\DateInterval::createFromDateString('1 week'));
             $item->set($data);
             $this->adapter->save($item);
         }

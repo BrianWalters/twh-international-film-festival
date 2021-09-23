@@ -79,8 +79,11 @@ class Comment
         return $this;
     }
 
-    public function getTimeRelativeToMovie(Movie $movie)
+    public function getTimeRelativeToMovie(Movie $movie): string
     {
+        if (!$movie->getStartTime())
+            return '';
+
         $intervalFromStartTime = $this->createdAt->diff($movie->getStartTime());
         $intervalFromEndTime = $this->createdAt->diff($movie->getEndTime());
 
@@ -95,7 +98,7 @@ class Comment
             return $endTimeIntervalString . ' after the movie';
     }
 
-    private function makeIntervalTimeString(\DateInterval $interval)
+    private function makeIntervalTimeString(\DateInterval $interval): string
     {
         $intervalString = '';
         if ($interval->days > 0)

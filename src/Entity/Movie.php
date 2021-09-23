@@ -23,14 +23,13 @@ class Movie
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $imdb;
+    private ?string $imdb;
 
     /**
-     * @ORM\Column(type="datetimetz")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="datetimetz", nullable="true")
      * @Assert\DateTime()
      */
-    private $startTime;
+    private ?\DateTimeInterface $startTime;
 
     /**
      * @ORM\Column(type="integer")
@@ -50,7 +49,13 @@ class Movie
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $lukeBit;
+    private ?string $lukeBit;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank
+     */
+    private ?int $yearFeasted;
 
     public function __construct()
     {
@@ -175,6 +180,9 @@ class Movie
 
     public function isMovieActive(): bool
     {
+        if (!$this->startTime)
+            return false;
+
         $now = new \DateTime('now');
         $isAfterStartTime = $now->getTimestamp() > $this->getStartTime()->getTimestamp();
         $endTime = $this->getEndTime();
@@ -184,12 +192,18 @@ class Movie
 
     public function isMovieOver(): bool
     {
+        if (!$this->startTime)
+            return true;
+
         $now = new \DateTime('now');
         return $now->getTimestamp() > $this->getEndTime()->getTimestamp();
     }
 
-    public function getEndTime(): \DateTimeInterface
+    public function getEndTime(): ?\DateTimeInterface
     {
+        if (!$this->startTime)
+            return null;
+
         $endTime = clone $this->getStartTime();
         $endTime->modify($this->getRuntime() . ' minutes');
         return $endTime;
@@ -203,6 +217,18 @@ class Movie
     public function setLukeBit(?string $lukeBit): self
     {
         $this->lukeBit = $lukeBit;
+
+        return $this;
+    }
+
+    public function getYearFeasted(): ?int
+    {
+        return $this->yearFeasted;
+    }
+
+    public function setYearFeasted(?int $yearFeasted): self
+    {
+        $this->yearFeasted = $yearFeasted;
 
         return $this;
     }

@@ -17,6 +17,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Imdb</th>
+                        <th>Year feasted</th>
                         <th>Start Time</th>
                         <th>Runtime</th>
                         <th>actions</th>
@@ -31,6 +32,7 @@
                                     {{ movie.imdb }}
                                 </a>
                             </td>
+                            <td>{{ movie.yearFeasted }}</td>
                             <td>{{ movie.startTime|date }}</td>
                             <td>{{ movie.runtime }}</td>
                             <td>

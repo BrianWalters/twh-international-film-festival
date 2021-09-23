@@ -15,6 +15,7 @@ class MovieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('imdb');
+        $builder->add('yearFeasted');
         $builder->add('startTime', DateTimeType::class, [
             'html5' => true,
             'widget' => 'single_text',
