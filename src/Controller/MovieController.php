@@ -145,8 +145,16 @@ class MovieController extends AbstractController
     {
         $currentYear = $year = (int)(new \DateTime('now'))->format('Y');
 
-        $movies = $movieRepository->groupByYear();
+        $movies = $movieRepository->findAll();
 
-        dd($movies);
+        $moviesByYear = [];
+
+        while ($movie = array_pop($movies)) {
+            $moviesByYear[$movie->getYearFeasted()][] = $movie;
+        }
+
+        return $this->render('page/past-index.html.twig', [
+            'moviesByYear' => $moviesByYear,
+        ]);
     }
 }

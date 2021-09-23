@@ -18,14 +18,4 @@ class MovieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Movie::class);
     }
-
-    public function groupByYear(): array
-    {
-        $qb = $this->createQueryBuilder('movie');
-
-        $qb->addSelect('movie.yearFeasted');
-        $qb->addGroupBy('movie.yearFeasted');
-
-        return $qb->getQuery()->getResult();
-    }
 }

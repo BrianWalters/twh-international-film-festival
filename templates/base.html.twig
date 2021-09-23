@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %}Feast of the Flesh Volume 11{% endblock %}</title>
+        <title>{% block title %}Feast of the Flesh Fest{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('bootstrap-4.6.0-dist/css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="{{ asset('fontawesome-free-5.11.2-web/css/all.min.css') }}">
@@ -37,7 +37,12 @@
                 </div>
             {% endif %}
         </header>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <main class="container">
+                {% block container %}
+                {% endblock %}
+            </main>
+        {% endblock %}
         <footer class="pt-3 pb-3 bg-darkest">
             <div class="container">
                 <div class="row">

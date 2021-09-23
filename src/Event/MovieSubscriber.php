@@ -31,7 +31,7 @@ class MovieSubscriber implements EventSubscriberInterface
     {
         $object = $args->getObject();
         if ($object instanceof Movie) {
-            $this->updateMovieRuntime($object);
+            $this->updateMovieFromOmdb($object);
         }
     }
 
@@ -39,14 +39,15 @@ class MovieSubscriber implements EventSubscriberInterface
     {
         $object = $args->getObject();
         if ($object instanceof Movie) {
-            $this->updateMovieRuntime($object);
+            $this->updateMovieFromOmdb($object);
         }
     }
 
-    private function updateMovieRuntime(Movie $movie): void
+    private function updateMovieFromOmdb(Movie $movie): void
     {
         $omdbMovie = $this->omdbApi->getMovie($movie->getImdb());
         $dateInterval = \DateInterval::createFromDateString($omdbMovie->Runtime);
         $movie->setRuntime($dateInterval->i);
+        $movie->setTitle($omdbMovie->Title);
     }
 }
