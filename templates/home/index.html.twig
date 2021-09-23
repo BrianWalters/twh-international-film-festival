@@ -84,17 +84,10 @@
                                             {% endif %}
                                         </dd>
                                         {% if movie.lukeBit %}
-                                            <div style="position: relative;">
-                                                <button class="bit-button" type="button" aria-controls="bit-luke-{{ movie.id }}">
-                                                    {% include 'partials/random-luke-image.html.twig' %}
-                                                </button>
-                                                <div class="bit" id="bit-luke-{{ movie.id }}" aria-expanded="false">
-                                                    <button class="bit-close-button" type="button" aria-controls="bit-luke-{{ movie.id }}">
-                                                        <span class="fa fa-times"></span>
-                                                    </button>
-                                                    {{ movie.lukeBit|nl2br }}
-                                                </div>
-                                            </div>
+                                            <button class="bit-button" type="button" data-toggle="modal" data-target="#modal-{{ movie.id }}">
+                                                {% include 'partials/random-luke-image.html.twig' %}
+                                            </button>
+                                            {% include 'partials/modal.html.twig' %}
                                         {% endif %}
                                     </dl>
                                 </div>
@@ -105,10 +98,4 @@
             </ul>
         </div>
     </main>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/web-animations.min.js') }}"></script>
-    <script src="{{ asset('js/bit-button.js') }}"></script>
 {% endblock %}
