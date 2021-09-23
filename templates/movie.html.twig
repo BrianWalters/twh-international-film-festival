@@ -6,17 +6,31 @@
 
 {% block body %}
     <main class="container">
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-sm">
                 <p><a href="{{ path('home') }}">Back home</a></p>
-                <div style="margin-bottom: 24px;">
-                    <h1 style="display:inline;">{{ omdb(movie).Title }}</h1>
+                <div>
+                    <h1 class="d-inline m-0">{{ omdb(movie).Title }}</h1>
                     <span>
                         <a href="https://imdb.com/title/{{ movie.imdb }}">
                             (IMDb <span class="fa fa-external-link-alt"></span>)
                         </a>
                     </span>
                 </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-sm">
+                <button
+                    type="button" class="btn btn-lg btn-orange"
+                    data-toggle="popover"
+                    title="Genre & plot"
+                    data-content="{{ omdb(movie).Genre }}. {{ omdb(movie).Plot }}"
+                >
+
+                    Reveal plot
+                </button>
             </div>
         </div>
 
@@ -112,4 +126,14 @@
             </div>
         </div>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    {{ parent() }}
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
 {% endblock %}

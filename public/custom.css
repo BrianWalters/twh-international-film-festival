@@ -86,3 +86,8 @@ a.bg-darkest.list-group-item:hover {
     border: 0;
     border-radius: 0;
 }
+
+/* Popover */
+.popover-header {
+    color: var(--dark);
+}
