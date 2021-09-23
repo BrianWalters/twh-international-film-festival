@@ -9,6 +9,7 @@
         "composer/package-versions-deprecated": "1.11.99.4",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.9",
         "eightpoints/guzzle-bundle": "^7.3",
@@ -41,7 +42,8 @@
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.3",
-        "symfony/web-profiler-bundle": "*"
+        "symfony/web-profiler-bundle": "*",
+        "zenstruck/foundry": "^1.13"
     },
     "config": {
         "preferred-install": {

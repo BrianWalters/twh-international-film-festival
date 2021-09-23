@@ -45,6 +45,9 @@ class MovieSubscriber implements EventSubscriberInterface
 
     private function updateMovieFromOmdb(Movie $movie): void
     {
+        if ($movie->getRuntime() && $movie->getTitle())
+            return;
+
         $omdbMovie = $this->omdbApi->getMovie($movie->getImdb());
         $dateInterval = \DateInterval::createFromDateString($omdbMovie->Runtime);
         $movie->setRuntime($dateInterval->i);

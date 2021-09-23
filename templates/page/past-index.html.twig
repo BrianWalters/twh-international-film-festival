@@ -3,6 +3,9 @@
 {% block container %}
     <div class="row">
         <div class="col-md-12">
+            <p>
+                <a href="{{ path('home') }}">Home</a>
+            </p>
             <h1>Past movies</h1>
             {% for year, movies in moviesByYear %}
                 <h2>{{ year }}</h2>

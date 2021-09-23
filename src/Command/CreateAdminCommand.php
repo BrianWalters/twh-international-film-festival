@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\User;
+use App\Service\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,17 +17,14 @@ class CreateAdminCommand extends Command
 {
     protected static $defaultName = 'app:create-admin';
     protected static $defaultDescription = 'Create an admin user.';
-    private ?EntityManagerInterface $entityManager;
-    private ?UserPasswordEncoderInterface $userPasswordEncoder;
+    private UserManager $userManager;
 
     public function __construct(
         string $name = null,
-        ?EntityManagerInterface $entityManager = null,
-        ?UserPasswordEncoderInterface $userPasswordEncoder = null
+        UserManager $userManager
     ) {
         parent::__construct($name);
-        $this->entityManager = $entityManager;
-        $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->userManager = $userManager;
     }
 
     protected function configure(): void
@@ -39,14 +37,7 @@ class CreateAdminCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $user = new User();
-
-        $user->setRoles(['ROLE_ADMIN']);
-
         $email = $io->ask('What email?');
-
-        $user->setEmail($email);
-
         $password = $io->askHidden('What password? (this is hidden)');
         $passwordConfirm = $io->askHidden('Confirm password.');
 
@@ -55,12 +46,7 @@ class CreateAdminCommand extends Command
             return 1;
         }
 
-        $user->setPassword(
-            $this->userPasswordEncoder->encodePassword($user, $password)
-        );
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->userManager->makeAdmin($email, $password);
 
         $io->success('Admin user created.');
 
