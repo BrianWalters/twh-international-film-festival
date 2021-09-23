@@ -16,7 +16,6 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Title</th>
                         <th>Imdb</th>
                         <th>Start Time</th>
                         <th>Runtime</th>
@@ -27,8 +26,11 @@
                     {% for movie in movies %}
                         <tr>
                             <td>{{ movie.id }}</td>
-                            <td>{{ movie.title }}</td>
-                            <td>{{ movie.imdb }}</td>
+                            <td>
+                                <a href="https://imdb.com/title/{{ movie.imdb }}" target="_blank" rel="noopener">
+                                    {{ movie.imdb }}
+                                </a>
+                            </td>
                             <td>{{ movie.startTime|date }}</td>
                             <td>{{ movie.runtime }}</td>
                             <td>

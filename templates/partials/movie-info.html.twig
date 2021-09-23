@@ -1,10 +1,10 @@
 <dl>
     <dt>Year</dt>
-    <dd>{{ omdb.getMovie(movie.imdb).Year }}</dd>
+    <dd>{{ omdb(movie).Year }}</dd>
+    <dt>Rated</dt>
+    <dd>{{ omdb(movie).Rated }}</dd>
     <dt>Runtime</dt>
-    <dd>{{ movie.runtime }} minutes</dd>
-    <dt>Director</dt>
-    <dd>{{ omdb.getMovie(movie.imdb).Director }}</dd>
+    <dd>{{ omdb(movie).Runtime }}</dd>
     <dt>Box Office</dt>
-    <dd>{{ omdb.getMovie(movie.imdb).BoxOffice }}</dd>
+    <dd>{{ omdb(movie).BoxOffice }}</dd>
 </dl>

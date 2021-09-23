@@ -6,27 +6,24 @@ namespace App\OMDB;
 
 use App\Client\OMDBClient;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class API
 {
-    /**
-     * @var OMDBClient
-     */
-    private $client;
-    private $APIKey;
-    /**
-     * @var AdapterInterface
-     */
-    private $adapter;
+    private OMDBClient $client;
+    private string $APIKey;
+    private AdapterInterface $adapter;
+    private DenormalizerInterface $denormalizer;
 
-    public function __construct(OMDBClient $client, AdapterInterface $adapter, $OMDBAPIKey)
+    public function __construct(OMDBClient $client, AdapterInterface $adapter, string $OMDBAPIKey, DenormalizerInterface $denormalizer)
     {
         $this->client = $client;
         $this->APIKey = $OMDBAPIKey;
         $this->adapter = $adapter;
+        $this->denormalizer = $denormalizer;
     }
 
-    public function getMovie($id)
+    public function getMovie($id): OmdbMovie
     {
         $item = $this->adapter->getItem("movie_$id");
 
@@ -39,19 +36,23 @@ class API
             ]);
 
             $data = json_decode($response->getBody()->getContents(), true);
-            $item->expiresAfter(\DateInterval::createFromDateString('1 hour'));
+            $item->expiresAfter(\DateInterval::createFromDateString('24 hours'));
             $item->set($data);
             $this->adapter->save($item);
         }
 
-        return $item->get();
+        $omdbMovie = $this->denormalizer->denormalize($item->get(), OmdbMovie::class);
+        if ($omdbMovie instanceof OmdbMovie)
+            return $omdbMovie;
+
+        throw new \Exception('Error deserializing movie.');
     }
 
     public function getPosterURL($id): string
     {
         $movie = $this->getMovie($id);
-        if (isset($movie['Poster']))
-            return $movie['Poster'];
+        if ($movie->Poster)
+            return $movie->Poster;
 
         return "http://img.omdbapi.com/?apikey=$this->APIKey&i=$id";
     }

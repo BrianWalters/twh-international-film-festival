@@ -14,21 +14,12 @@ class MovieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title');
         $builder->add('imdb');
         $builder->add('startTime', DateTimeType::class, [
             'html5' => true,
             'widget' => 'single_text',
         ]);
-        $builder->add('runtime', IntegerType::class, [
-            'required' => true,
-        ]);
-
         $builder->add('lukeBit', TextareaType::class, [
-            'required' => false,
-        ]);
-
-        $builder->add('joannaBit', TextareaType::class, [
             'required' => false,
         ]);
     }

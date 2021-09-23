@@ -41,8 +41,7 @@
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.3",
-        "symfony/web-profiler-bundle": "*",
-        "symfony/web-server-bundle": "*"
+        "symfony/web-profiler-bundle": "*"
     },
     "config": {
         "preferred-install": {

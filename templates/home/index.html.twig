@@ -12,7 +12,7 @@
                         <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }} bg-darkest text-orange"
                            style="display: flex; align-items: center;"
                            href="{{ path('movie_details', {movie:movie.id}) }}">
-                            {{ movie.startTime|date('M j, g:i A') }} – {{ movie.title }}
+                            {{ movie.startTime|date('M j, g:i A') }} – {{ omdb(movie).Title }}
                             {% if movie.movieOver %}
                                 <span style="margin-left: auto" class="fa fa-check"></span>
                             {% endif %}
@@ -34,7 +34,7 @@
                                 <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
                             </a>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-9">
                             <p>
                                 <strong>
                                     Starting at {{ movie.startTime|date('g:i A') }}
@@ -42,56 +42,63 @@
                             </p>
                             <div style="margin-bottom: 16px;">
                                 <h2 style="display:inline;">
-                                    <a href="{{ path('movie_details', { 'movie': movie.id }) }}">{{ movie.title }}</a>
+                                    <a href="{{ path('movie_details', { 'movie': movie.id }) }}">
+                                        {{ omdb(movie).Title }}
+                                    </a>
                                 </h2>
                                 <span>
-                                <a href="https://imdb.com/title/{{ movie.imdb }}" target="_blank">
-                                    (IMDb <span class="fa fa-external-link-alt"></span>)
-                                </a>
-                        </span>
+                                    <a href="https://imdb.com/title/{{ movie.imdb }}" target="_blank" rel="noopener">
+                                        (IMDb <span class="fa fa-external-link-alt"></span>)
+                                    </a>
+                                </span>
                             </div>
-                            {% include 'partials/movie-info.html.twig' %}
-                        </div>
-                        <div class="col-sm-3 align-self-center">
-                            <dl>
-                                <dt>Average Rating</dt>
-                                <dd>
-                                    {% if movie.ratings|length > 0 %}
-                                        {{ movie.averageRating }}
-                                        {{ stars.stars(movie.averageRating) }}
-                                    {% else %}
-                                        No ratings yet!
-                                    {% endif %}
-                                </dd>
-                                <dt>
-                                    Comments
-                                </dt>
-                                <dd>
-                                    {% if movie.comments|length %}
-                                        <a href="{{ path('movie_comments', { movie: movie.id }) }}">
-                                            {{ movie.comments|length }}
-                                            <span class="fa fa-comment"></span>
-                                        </a>
-                                    {% else %}
-                                        No comments yet!
-                                    {% endif %}
-                                </dd>
-                                {% if movie.lukeBit or movie.joannaBit %}
-                                    <div style="position: relative;">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    {% include 'partials/movie-people.html.twig' %}
+                                </div>
+                                <div class="col-sm-4">
+                                    {% include 'partials/movie-info.html.twig' %}
+                                </div>
+                                <div class="col-sm-4">
+                                    <dl>
+                                        <dt>Average Rating</dt>
+                                        <dd>
+                                            {% if movie.ratings|length > 0 %}
+                                                {{ movie.averageRating }}
+                                                {{ stars.stars(movie.averageRating) }}
+                                            {% else %}
+                                                No ratings yet!
+                                            {% endif %}
+                                        </dd>
+                                        <dt>
+                                            Comments
+                                        </dt>
+                                        <dd>
+                                            {% if movie.comments|length %}
+                                                <a href="{{ path('movie_comments', { movie: movie.id }) }}">
+                                                    {{ movie.comments|length }}
+                                                    <span class="fa fa-comment"></span>
+                                                </a>
+                                            {% else %}
+                                                No comments yet!
+                                            {% endif %}
+                                        </dd>
                                         {% if movie.lukeBit %}
-                                            <button class="bit-button" type="button" aria-controls="bit-luke-{{ movie.id }}">
-                                                {% include 'partials/random-luke-image.html.twig' %}
-                                            </button>
-                                            <div class="bit" id="bit-luke-{{ movie.id }}" aria-expanded="false">
-                                                <button class="bit-close-button" type="button" aria-controls="bit-luke-{{ movie.id }}">
-                                                    <span class="fa fa-times"></span>
+                                            <div style="position: relative;">
+                                                <button class="bit-button" type="button" aria-controls="bit-luke-{{ movie.id }}">
+                                                    {% include 'partials/random-luke-image.html.twig' %}
                                                 </button>
-                                                {{ movie.lukeBit|nl2br }}
+                                                <div class="bit" id="bit-luke-{{ movie.id }}" aria-expanded="false">
+                                                    <button class="bit-close-button" type="button" aria-controls="bit-luke-{{ movie.id }}">
+                                                        <span class="fa fa-times"></span>
+                                                    </button>
+                                                    {{ movie.lukeBit|nl2br }}
+                                                </div>
                                             </div>
                                         {% endif %}
-                                    </div>
-                                {% endif %}
-                            </dl>
+                                    </dl>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 {% endfor %}

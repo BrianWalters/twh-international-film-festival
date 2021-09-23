@@ -23,12 +23,6 @@ class Movie
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $title;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
     private $imdb;
 
     /**
@@ -40,8 +34,6 @@ class Movie
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
-     * @Assert\Range(min="1")
      */
     private $runtime;
 
@@ -60,11 +52,6 @@ class Movie
      */
     private $lukeBit;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $joannaBit;
-
     public function __construct()
     {
         $this->ratings = new ArrayCollection();
@@ -74,18 +61,6 @@ class Movie
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getImdb(): ?string
@@ -186,7 +161,7 @@ class Movie
         return $this;
     }
 
-    public function getAverageRating()
+    public function getAverageRating(): float|int
     {
         if (sizeof($this->ratings) === 0)
             return 0;
@@ -198,7 +173,7 @@ class Movie
         return round($total / sizeof($this->ratings), 1);
     }
 
-    public function isMovieActive()
+    public function isMovieActive(): bool
     {
         $now = new \DateTime('now');
         $isAfterStartTime = $now->getTimestamp() > $this->getStartTime()->getTimestamp();
@@ -207,13 +182,13 @@ class Movie
         return $isAfterStartTime && $isBeforeRuntime;
     }
 
-    public function isMovieOver()
+    public function isMovieOver(): bool
     {
         $now = new \DateTime('now');
         return $now->getTimestamp() > $this->getEndTime()->getTimestamp();
     }
 
-    public function getEndTime()
+    public function getEndTime(): \DateTimeInterface
     {
         $endTime = clone $this->getStartTime();
         $endTime->modify($this->getRuntime() . ' minutes');
@@ -228,18 +203,6 @@ class Movie
     public function setLukeBit(?string $lukeBit): self
     {
         $this->lukeBit = $lukeBit;
-
-        return $this;
-    }
-
-    public function getJoannaBit(): ?string
-    {
-        return $this->joannaBit;
-    }
-
-    public function setJoannaBit(?string $joannaBit): self
-    {
-        $this->joannaBit = $joannaBit;
 
         return $this;
     }
