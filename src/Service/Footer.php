@@ -24,11 +24,15 @@ class Footer
             ],
             [
                 'text' => 'Feast of the Flesh 9',
-                'url' => 'http://feast-of-the-flesh-9.bdubcodes.net/',
+                'url' => 'https://nine.feastofthefleshfest.app',
             ],
             [
                 'text' => 'Feast of the Flesh 10',
-                'url' => 'http://feast-of-the-flesh-10.bdubcodes.net/',
+                'url' => 'https://ten.feastofthefleshfest.app',
+            ],
+            [
+                'text' => 'Feast of the Flesh 11',
+                'url' => 'https://eleven.feastofthefleshfest.app',
             ]
         ];
     }
