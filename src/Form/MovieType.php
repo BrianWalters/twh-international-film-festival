@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Movie;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -20,7 +21,7 @@ class MovieType extends AbstractType
             'html5' => true,
             'widget' => 'single_text',
         ]);
-        $builder->add('lukeBit', TextareaType::class, [
+        $builder->add('lukeBit', CKEditorType::class, [
             'required' => false,
         ]);
     }
