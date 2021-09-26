@@ -18,4 +18,19 @@ class MovieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Movie::class);
     }
+
+    /**
+     * @return Movie[]
+     */
+    public function findAllExceptYear(int $year): array
+    {
+        $qb = $this->createQueryBuilder('movie');
+
+        $qb->andWhere('movie.yearFeasted != :year');
+        $qb->setParameter('year', $year);
+
+        $qb->orderBy('movie.yearFeasted', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

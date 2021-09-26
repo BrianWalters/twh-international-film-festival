@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -23,18 +24,20 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/{movie}", name="movie_details")
      */
-    public function movieDetailsAction(Movie $movie,
-                                       CommentRepository $commentRepository,
-                                       ?Request $request = null)
-    {
+    public function movieDetailsAction(
+        Movie $movie,
+        CommentRepository $commentRepository,
+        ?Request $request = null
+    ) {
         $comment = new Comment();
         $comment->setMovie($movie);
         $commentForm = $this->createForm(CommentType::class, $comment, [
             'action' => $this->generateUrl('submit_comment'),
         ]);
 
-        if ($request)
+        if ($request) {
             $commentForm->handleRequest($request);
+        }
 
         $comments = $commentRepository->findBy(
             ['movie' => $movie],
@@ -48,8 +51,9 @@ class MovieController extends AbstractController
             'action' => $this->generateUrl('submit_rating'),
         ]);
 
-        if ($request)
+        if ($request) {
             $ratingForm->handleRequest($request);
+        }
 
         return $this->render('movie.html.twig', [
             'ratingForm' => $ratingForm->createView(),
@@ -88,10 +92,11 @@ class MovieController extends AbstractController
     /**
      * @Route("/rating", name="submit_rating", methods={"POST"})
      */
-    public function submitRating(Request $request,
-                                 EntityManagerInterface $entityManager,
-                                 DateProvider $dateProvider)
-    {
+    public function submitRating(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        DateProvider $dateProvider
+    ) {
         $rating = new Rating();
 
         $ratingForm = $this->createForm(RatingType::class, $rating);
@@ -127,10 +132,10 @@ class MovieController extends AbstractController
     public function movieComments(Movie $movie, CommentRepository $commentRepository)
     {
         $comments = $commentRepository->findBy([
-            'movie' => $movie,
-        ], [
-            'createdAt' => 'ASC'
-        ]);
+                                                   'movie' => $movie,
+                                               ], [
+                                                   'createdAt' => 'ASC'
+                                               ]);
 
         return $this->render('page/comments.html.twig', [
             'comments' => $comments,
@@ -143,9 +148,9 @@ class MovieController extends AbstractController
      */
     public function pastIndex(MovieRepository $movieRepository)
     {
-        $currentYear = $year = (int)(new \DateTime('now'))->format('Y');
+        $currentYear = (int)(new \DateTime('now'))->format('Y');
 
-        $movies = $movieRepository->findAll();
+        $movies = $movieRepository->findAllExceptYear($currentYear);
 
         $moviesByYear = [];
 
@@ -155,6 +160,22 @@ class MovieController extends AbstractController
 
         return $this->render('page/past-index.html.twig', [
             'moviesByYear' => $moviesByYear,
+        ]);
+    }
+
+    /**
+     * @Route("/past/{id}", name="movie_past_detail")
+     */
+    public function pastMovie($id, MovieRepository $movieRepository): Response
+    {
+        $movie = $movieRepository->find($id);
+
+        if (!$movie) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('page/past-movie.html.twig', [
+            'movie' => $movie,
         ]);
     }
 }
