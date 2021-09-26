@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% import 'partials/stars.html.twig' as stars %}
-
 {% block body %}
     <main>
         <div class="jumbotron jumbotron-fluid bg-dark text-light">
@@ -64,25 +62,13 @@
                                     <dl>
                                         <dt>Average Rating</dt>
                                         <dd>
-                                            {% if movie.ratings|length > 0 %}
-                                                {{ movie.averageRating }}
-                                                {{ stars.stars(movie.averageRating) }}
-                                            {% else %}
-                                                No ratings yet!
-                                            {% endif %}
+                                            {% include 'partials/average-rating.html.twig' %}
                                         </dd>
                                         <dt>
                                             Comments
                                         </dt>
                                         <dd>
-                                            {% if movie.comments|length %}
-                                                <a href="{{ path('movie_comments', { movie: movie.id }) }}">
-                                                    {{ movie.comments|length }}
-                                                    <span class="fa fa-comment"></span>
-                                                </a>
-                                            {% else %}
-                                                No comments yet!
-                                            {% endif %}
+                                            {% include 'partials/comments-count.html.twig' %}
                                         </dd>
                                         {% if movie.lukeBit %}
                                             <button class="bit-button" type="button" data-toggle="modal" data-target="#modal-{{ movie.id }}">

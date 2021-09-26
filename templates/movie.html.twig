@@ -9,14 +9,7 @@
         <div class="row mb-4">
             <div class="col-sm">
                 <p><a href="{{ path('home') }}">Back home</a></p>
-                <div>
-                    <h1 class="d-inline m-0">{{ omdb(movie).Title }}</h1>
-                    <span>
-                        <a href="https://imdb.com/title/{{ movie.imdb }}">
-                            (IMDb <span class="fa fa-external-link-alt"></span>)
-                        </a>
-                    </span>
-                </div>
+                {% include 'partials/movie-title-with-imdb.html.twig' %}
             </div>
         </div>
 

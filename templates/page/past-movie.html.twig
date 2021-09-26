@@ -3,19 +3,47 @@
 {% block title %}{{ movie.title }} | {{ parent() }}{% endblock %}
 
 {% block container %}
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-12">
             <p>
                 <a href="{{ path('home') }}">Home</a>
+                |
                 <a href="{{ path('movie_past_index') }}">Past movies</a>
             </p>
-            <h1>{{ movie.title }}</h1>
+            {% include 'partials/movie-title-with-imdb.html.twig' %}
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-3">
-
+        <div class="col-sm">
+            <p>
+                <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="{{ omdb(movie).Title }}">
+            </p>
         </div>
+        <div class="col-sm">
+            {% include 'partials/movie-people.html.twig' %}
+        </div>
+        <div class="col-sm">
+            {% include 'partials/movie-info.html.twig' %}
+        </div>
+        {% if movie.ratings|length > 0 %}
+            <div class="col-sm">
+                <dl>
+                    <dt>Feasters' rating</dt>
+                    <dd>{% include 'partials/average-rating.html.twig' %}</dd>
+                    <dt>Feasters' comments</dt>
+                    <dd>{% include 'partials/comments-count.html.twig' %}</dd>
+                </dl>
+            </div>
+        {% endif %}
     </div>
+
+    {% if movie.lukeBit %}
+        <div class="row mb-5 mt-5">
+            <div class="col-md-12">
+                <h2>Luke says:</h2>
+                {{ movie.lukeBit|raw }}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

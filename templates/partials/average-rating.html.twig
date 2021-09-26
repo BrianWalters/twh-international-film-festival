@@ -1,0 +1,8 @@
+{% import 'partials/stars.html.twig' as stars %}
+
+{% if movie.ratings|length > 0 %}
+    {{ movie.averageRating }}
+    {{ stars.stars(movie.averageRating) }}
+{% else %}
+    No ratings yet!
+{% endif %}
