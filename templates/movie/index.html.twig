@@ -10,6 +10,9 @@
                 <p>
                     <a href="{{ path('home') }}">Home</a>
                 </p>
+                <p>
+                    <a href="{{ path('movie_new') }}">Create new</a>
+                </p>
             </div>
         </div>
 
@@ -20,6 +23,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Imdb</th>
+                        <th>Title</th>
                         <th>Year feasted</th>
                         <th>Start Time</th>
                         <th>Runtime</th>
@@ -35,8 +39,9 @@
                                     {{ movie.imdb }}
                                 </a>
                             </td>
+                            <td>{{ movie.title }}</td>
                             <td>{{ movie.yearFeasted }}</td>
-                            <td>{{ movie.startTime|date }}</td>
+                            <td>{{ movie.startTime ? movie.startTime|date : 'None' }}</td>
                             <td>{{ movie.runtime }}</td>
                             <td>
                                 <a class="btn btn-secondary" href="{{ path('movie_show', {'id': movie.id}) }}">show</a>
