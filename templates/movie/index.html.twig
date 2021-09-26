@@ -26,7 +26,7 @@
                         <th>Title</th>
                         <th>Year feasted</th>
                         <th>Start Time</th>
-                        <th>Runtime</th>
+                        <th>Luke</th>
                         <th>actions</th>
                     </tr>
                     </thead>
@@ -42,7 +42,7 @@
                             <td>{{ movie.title }}</td>
                             <td>{{ movie.yearFeasted }}</td>
                             <td>{{ movie.startTime ? movie.startTime|date : 'None' }}</td>
-                            <td>{{ movie.runtime }}</td>
+                            <td>{{ movie.truncatedLukeBit }}</td>
                             <td>
                                 <a class="btn btn-secondary" href="{{ path('movie_show', {'id': movie.id}) }}">show</a>
                                 <a class="btn btn-primary" href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>

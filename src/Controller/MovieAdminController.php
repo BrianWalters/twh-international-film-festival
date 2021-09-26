@@ -8,6 +8,7 @@ use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -53,6 +54,8 @@ class MovieAdminController extends AbstractController
             $em->persist($movie);
             $em->flush();
 
+            $this->addFlash('notice', "$movie was created.");
+
             return $this->redirectToRoute('movie_index');
         }
 
@@ -77,7 +80,7 @@ class MovieAdminController extends AbstractController
     /**
      * @Route("/{id}/edit", name="movie_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Movie $movie, $adminEnabled): Response
+    public function edit(Request $request, Movie $movie, $adminEnabled, FlashBagInterface $flashBag): Response
     {
         if (!$adminEnabled) {
             throw $this->createAccessDeniedException();
@@ -88,6 +91,7 @@ class MovieAdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('notice', "$movie was saved.");
 
             return $this->redirectToRoute('movie_edit', ['id' => $movie->getId()]);
         }
@@ -107,10 +111,13 @@ class MovieAdminController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
+        $title = $movie->getTitle();
+
         if ($this->isCsrfTokenValid('delete' . $movie->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($movie);
             $em->flush();
+            $this->addFlash('notice', "$title was deleted.");
         }
 
         return $this->redirectToRoute('movie_index');

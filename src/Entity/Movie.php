@@ -68,6 +68,11 @@ class Movie
         $this->comments = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->title ?? 'Untitled';
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -260,5 +265,18 @@ class Movie
         $interval = $this->startTime->diff($now);
 
         return $interval->days > 14;
+    }
+
+    public function getTruncatedLukeBit(): ?string
+    {
+        if (!$this->lukeBit)
+            return null;
+
+        $truncated = substr(strip_tags($this->lukeBit), 0 , 200);
+
+        if (strlen($truncated) === 200)
+            $truncated .= '...';
+
+        return $truncated;
     }
 }
