@@ -277,6 +277,6 @@ class Movie
         if (strlen($truncated) === 200)
             $truncated .= '...';
 
-        return $truncated;
+        return html_entity_decode($truncated, ENT_HTML5 | ENT_QUOTES);
     }
 }
