@@ -20,10 +20,19 @@ class MovieAdminController extends AbstractController
      */
     public function index(MovieRepository $movieRepository, $adminEnabled): Response
     {
-        if (!$adminEnabled)
+        if (!$adminEnabled) {
             throw $this->createAccessDeniedException();
+        }
 
-        return $this->render('movie/index.html.twig', ['movies' => $movieRepository->findAll()]);
+        return $this->render(
+            'movie/index.html.twig',
+            [
+                'movies' => $movieRepository->findBy(
+                    [],
+                    ['yearFeasted' => 'DESC']
+                )
+            ]
+        );
     }
 
     /**
@@ -31,8 +40,9 @@ class MovieAdminController extends AbstractController
      */
     public function new(Request $request, $adminEnabled): Response
     {
-        if (!$adminEnabled)
+        if (!$adminEnabled) {
             throw $this->createAccessDeniedException();
+        }
 
         $movie = new Movie();
         $form = $this->createForm(MovieType::class, $movie);
@@ -57,8 +67,9 @@ class MovieAdminController extends AbstractController
      */
     public function show(Movie $movie, $adminEnabled): Response
     {
-        if (!$adminEnabled)
+        if (!$adminEnabled) {
             throw $this->createAccessDeniedException();
+        }
 
         return $this->render('movie/show.html.twig', ['movie' => $movie]);
     }
@@ -68,8 +79,9 @@ class MovieAdminController extends AbstractController
      */
     public function edit(Request $request, Movie $movie, $adminEnabled): Response
     {
-        if (!$adminEnabled)
+        if (!$adminEnabled) {
             throw $this->createAccessDeniedException();
+        }
 
         $form = $this->createForm(MovieType::class, $movie);
         $form->handleRequest($request);
@@ -91,10 +103,11 @@ class MovieAdminController extends AbstractController
      */
     public function delete(Request $request, Movie $movie, $adminEnabled): Response
     {
-        if (!$adminEnabled)
+        if (!$adminEnabled) {
             throw $this->createAccessDeniedException();
+        }
 
-        if ($this->isCsrfTokenValid('delete'.$movie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $movie->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($movie);
             $em->flush();

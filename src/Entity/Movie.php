@@ -249,4 +249,16 @@ class Movie
 
         return $this;
     }
+
+    public function isReadOnly(): bool
+    {
+        if (!$this->startTime)
+            return true;
+
+        $now = new \DateTime('now');
+
+        $interval = $this->startTime->diff($now);
+
+        return $interval->days > 14;
+    }
 }

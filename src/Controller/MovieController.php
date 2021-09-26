@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 class MovieController extends AbstractController
@@ -56,6 +57,7 @@ class MovieController extends AbstractController
         }
 
         return $this->render('movie.html.twig', [
+            'readOnly' => $movie->isReadOnly(),
             'ratingForm' => $ratingForm->createView(),
             'commentForm' => $commentForm->createView(),
             'comments' => $comments,
@@ -74,6 +76,9 @@ class MovieController extends AbstractController
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            if ($comment->getMovie()->isReadOnly())
+                throw new AccessDeniedException();
+
             $entityManager->persist($comment);
             $entityManager->flush();
             $this->addFlash('notice', 'Your comment was added.');
@@ -103,6 +108,9 @@ class MovieController extends AbstractController
         $ratingForm->handleRequest($request);
 
         $movie = $rating->getMovie();
+        if ($movie->isReadOnly())
+            throw new AccessDeniedException();
+
         if ($dateProvider->getToday() < $movie->getStartTime()) {
             $this->addFlash('error', "You can't add a rating before you've seen the movie you fucking tosser!");
             return $this->redirectToRoute('movie_details', [
