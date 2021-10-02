@@ -7,7 +7,7 @@
     <meta property="og:description" name="og:description" content="{{ description }}" />
     <meta property="og:type" name="og:type" content="article" />
     <meta property="og:url" name="og:url" content="{{ app.request.uri }}" />
-{#    <meta property="og:image" name="og:image" content="{{ movies|length > 0 ? omdb.getPosterURL(movie.imdb) : ''}}" />#}
+    <meta property="og:image" name="og:image" content="{{ movies|length > 0 ? omdb.getPosterURL(movies[0].imdb) : ''}}" />
     <meta property="twitter:card" name="twitter:card" content="summary_large_image" />
     <meta property="og:locale" name="og:locale" content="en_US" />
 {% endblock %}
