@@ -1,10 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ title }}{% endblock %}
+
+{% block head %}
+    <meta property="og:title" name="og:title" content="{{ title }}" />
+    <meta property="og:description" name="og:description" content="{{ description }}" />
+    <meta property="og:type" name="og:type" content="article" />
+    <meta property="og:url" name="og:url" content="{{ app.request.uri }}" />
+    <meta property="og:image" name="og:image" content="{{ movies|length > 0 ? omdb.getPosterURL(movie.imdb) : ''}}" />
+    <meta property="twitter:card" name="twitter:card" content="summary_large_image" />
+    <meta property="og:locale" name="og:locale" content="en_US" />
+{% endblock %}
+
 {% block body %}
     <main>
         <div class="jumbotron jumbotron-fluid bg-dark text-light">
             <div class="container">
-                <h1 class="display-4 text-center mb-3">Feast of the Flesh Fest Volume {{ volumeNumber }}</h1>
+                <h1 class="display-4 text-center mb-3">{{ title }}</h1>
                 <p class="text-center"><a href="{{ path('movie_past_index') }}">Past movies</a></p>
                 <div class="list-group">
                     {% for movie in movies %}

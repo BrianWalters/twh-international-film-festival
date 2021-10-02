@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Movie;
 use App\OMDB\API;
 use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,9 +26,15 @@ class HomeController extends AbstractController
             ]
         );
 
+        $volumeNumber = $year - 2009;
+
+        $description = implode(', ', array_map(fn(Movie $movie) => $movie->getTitle(), $movies));
+
         return $this->render('home/index.html.twig', [
+            'title' => "Feast of the Flesh Fest Volume $volumeNumber",
+            'description' => $description,
             'movies' => $movies,
-            'volumeNumber' => $year - 2009,
+            'volumeNumber' => $volumeNumber,
         ]);
     }
 }
