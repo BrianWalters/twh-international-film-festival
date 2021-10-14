@@ -28,6 +28,17 @@ use Zenstruck\Foundry\Proxy;
  */
 final class RatingFactory extends ModelFactory
 {
+    private array $validScores = [
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+    ];
+
     public function __construct()
     {
         parent::__construct();
@@ -39,7 +50,7 @@ final class RatingFactory extends ModelFactory
 
         return [
             'movie' => MovieFactory::random(),
-            'score' => self::faker()->randomFloat(1, .5, 5),
+            'score' => self::faker()->randomElement($this->validScores),
             'rater' => self::faker()->name(),
             'createdAt' => $date,
             'updatedAt' => $date,
