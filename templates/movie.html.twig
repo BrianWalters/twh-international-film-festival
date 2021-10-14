@@ -2,7 +2,7 @@
 
 {% import 'partials/stars.html.twig' as stars %}
 
-{% block title %}Feast of the Flesh | {{ omdb(movie).Title }}{% endblock %}
+{% block title %}Feast of the Flesh | {{ movie.title }}{% endblock %}
 
 {% block body %}
     <main class="container">
@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-sm">
                 <p>
-                    <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="{{ omdb(movie).Title }}">
+                    <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="{{ movie.title }}">
                 </p>
             </div>
             <div class="col-sm">

@@ -34,7 +34,7 @@ class Movie
     /**
      * @ORM\Column(type="integer")
      */
-    private $runtime;
+    private ?int $runtime;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Rating", mappedBy="movie", orphanRemoval=true, fetch="EXTRA_LAZY")
@@ -60,7 +60,7 @@ class Movie
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title = null;
 
     public function __construct()
     {
@@ -248,7 +248,7 @@ class Movie
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 

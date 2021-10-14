@@ -86,7 +86,9 @@ class MovieAdminController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm(MovieType::class, $movie);
+        $form = $this->createForm(MovieType::class, $movie, [
+            'include_title' => true,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

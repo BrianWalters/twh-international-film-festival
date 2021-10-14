@@ -23,7 +23,7 @@
                         <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }} bg-darkest text-orange"
                            style="display: flex; align-items: center;"
                            href="{{ path('movie_details', {movie:movie.id}) }}">
-                            {{ movie.startTime|date('M j, g:i A') }} – {{ omdb(movie).Title }}
+                            {{ movie.startTime|date('M j, g:i A') }} – {{ movie.title }}
                             {% if movie.movieOver %}
                                 <span style="margin-left: auto" class="fa fa-check"></span>
                             {% endif %}
@@ -54,7 +54,7 @@
                             <div style="margin-bottom: 16px;">
                                 <h2 style="display:inline;">
                                     <a href="{{ path('movie_details', { 'movie': movie.id }) }}">
-                                        {{ omdb(movie).Title }}
+                                        {{ movie.title }}
                                     </a>
                                 </h2>
                                 <span>
