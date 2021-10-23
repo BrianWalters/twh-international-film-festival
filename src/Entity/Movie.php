@@ -34,7 +34,7 @@ class Movie
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $runtime;
+    private ?int $runtime = null;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Rating", mappedBy="movie", orphanRemoval=true, fetch="EXTRA_LAZY")

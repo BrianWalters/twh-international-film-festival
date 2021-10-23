@@ -3,12 +3,12 @@
 {% block title %}Movie{% endblock %}
 
 {% block body %}
-    <main class="container">
+    <main class="container"">
         <div class="row">
             <div class="col-sm">
                 <h1>Movie</h1>
 
-                <table class="table">
+                <table class="table text-light">
                     <tbody>
                     <tr>
                         <th>Id</th>
@@ -30,6 +30,16 @@
                         <th>Runtime</th>
                         <td>{{ movie.runtime }}</td>
                     </tr>
+                        <tr>
+                            <td>Movie over</td>
+                            <td>
+                                {{ movie.movieOver ? 'Yes' : 'No' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Movie active</td>
+                            <td>{{ movie.movieActive ? 'Yes' : 'No' }}</td>
+                        </tr>
                     </tbody>
                 </table>
 
