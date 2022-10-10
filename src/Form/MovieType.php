@@ -29,6 +29,12 @@ class MovieType extends AbstractType
             'html5' => true,
             'widget' => 'single_text',
         ]);
+
+        $builder->add('runtime', IntegerType::class, [
+            'required' => false,
+            'help' => 'Leave blank to use value from OMDB. Enter number in minutes to set the runtime yourself.'
+        ]);
+
         $builder->add('lukeBit', CKEditorType::class, [
             'required' => false,
         ]);
