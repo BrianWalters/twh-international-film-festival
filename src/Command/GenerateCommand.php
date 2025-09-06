@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Controller\HomeController;
 use App\Controller\MovieController;
 use App\Entity\Movie;
+use App\OMDB\API;
 use App\Repository\CommentRepository;
 use App\Repository\MovieRepository;
 use Symfony\Component\Console\Command\Command;
@@ -39,20 +40,23 @@ class GenerateCommand extends Command
      * @var bool
      */
     private $readOnly;
+    private API $API;
 
-    public function __construct(?string $name = null,
+    public function __construct(
                                 HomeController $homeController,
                                 MovieRepository $movieRepository,
                                 MovieController $movieController,
                                 CommentRepository $commentRepository,
+                                API $API,
                                 $readOnly = false)
     {
-        parent::__construct($name);
+        parent::__construct();
         $this->homeController = $homeController;
         $this->movieRepository = $movieRepository;
         $this->filesystem = new Filesystem();
         $this->movieController = $movieController;
         $this->commentRepository = $commentRepository;
+        $this->API = $API;
         $this->readOnly = $readOnly;
     }
 
@@ -81,7 +85,7 @@ class GenerateCommand extends Command
 
     private function generateHome()
     {
-        $homeResponse = $this->homeController->index($this->movieRepository);
+        $homeResponse = $this->homeController->index($this->movieRepository, $this->API);
         $this->filesystem->dumpFile('build/index.html', $homeResponse->getContent());
     }
 

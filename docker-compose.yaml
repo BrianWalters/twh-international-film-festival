@@ -9,6 +9,6 @@ services:
             - ./docker/mysql/conf:/etc/mysql/conf.d
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: symfony
+            MYSQL_DATABASE: twh
             MYSQL_USER: symfony
             MYSQL_PASSWORD: secret
