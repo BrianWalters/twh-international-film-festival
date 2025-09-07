@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(MovieRepository $movieRepository, API $api)
+    public function index(MovieRepository $movieRepository)
     {
         $year = (int)(new \DateTime('now'))->format('Y');
 
@@ -26,15 +26,14 @@ class HomeController extends AbstractController
             ]
         );
 
-        $volumeNumber = $year - 2009;
+
 
         $description = implode(', ', array_map(fn(Movie $movie) => $movie->getTitle(), $movies));
 
         return $this->render('home/index.html.twig', [
-            'title' => "Feast of the Flesh Fest Volume $volumeNumber",
+            'title' => "Travis Wayne Hurt International Film Festival 2025",
             'description' => $description,
             'movies' => $movies,
-            'volumeNumber' => $volumeNumber,
         ]);
     }
 }

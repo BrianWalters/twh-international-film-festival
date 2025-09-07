@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %}Feast of the Flesh Fest{% endblock %}</title>
+        <title>{% block title %}Travis Wayne Hurt International Movie Festival{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('bootstrap-4.6.0-dist/css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="{{ asset('fontawesome-free-5.11.2-web/css/all.min.css') }}">
@@ -46,18 +46,6 @@
                 {% endblock %}
             </main>
         {% endblock %}
-        <footer class="pt-3 pb-3 bg-darkest">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        {% for link in footer.links %}
-                            <a href="{{ link.url }}"><small>{{ link.text }}</small></a>
-                            {% if not loop.last %}|{% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </footer>
         {% block javascripts %}
             <script src="{{ asset('js/jquery-3.x-git.slim.js') }}"></script>
             <script src="{{ asset('bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js') }}"></script>

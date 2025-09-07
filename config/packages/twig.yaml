@@ -7,4 +7,3 @@ twig:
         - 'rating_widget.html.twig'
     globals:
         omdb: '@App\OMDB\API'
-        footer: '@App\Service\Footer'

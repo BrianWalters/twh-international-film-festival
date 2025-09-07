@@ -47,11 +47,6 @@ class Movie
     private $comments;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private ?string $lukeBit;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\NotBlank
      */
@@ -219,18 +214,6 @@ class Movie
         return $endTime;
     }
 
-    public function getLukeBit(): ?string
-    {
-        return $this->lukeBit;
-    }
-
-    public function setLukeBit(?string $lukeBit): self
-    {
-        $this->lukeBit = $lukeBit;
-
-        return $this;
-    }
-
     public function getYearFeasted(): ?int
     {
         return $this->yearFeasted;
@@ -265,18 +248,5 @@ class Movie
         $interval = $this->startTime->diff($now);
 
         return $interval->days > 14;
-    }
-
-    public function getTruncatedLukeBit(): ?string
-    {
-        if (!$this->lukeBit)
-            return null;
-
-        $truncated = substr(strip_tags($this->lukeBit), 0 , 200);
-
-        if (strlen($truncated) === 200)
-            $truncated .= '...';
-
-        return html_entity_decode($truncated, ENT_HTML5 | ENT_QUOTES);
     }
 }

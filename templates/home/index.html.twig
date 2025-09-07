@@ -7,7 +7,7 @@
     <meta property="og:description" name="og:description" content="{{ description }}" />
     <meta property="og:type" name="og:type" content="article" />
     <meta property="og:url" name="og:url" content="{{ app.request.uri }}" />
-    <meta property="og:image" name="og:image" content="{{ movies|length > 0 ? omdb.getPosterURL(movies[0].imdb) : ''}}" />
+{#    <meta property="og:image" name="og:image" content="{{ movies|length > 0 ? omdb.getPosterURL(movies[0].imdb) : ''}}" />#}
     <meta property="twitter:card" name="twitter:card" content="summary_large_image" />
     <meta property="og:locale" name="og:locale" content="en_US" />
 {% endblock %}
@@ -17,7 +17,6 @@
         <div class="jumbotron jumbotron-fluid bg-dark text-light">
             <div class="container">
                 <h1 class="display-4 text-center mb-3">{{ title }}</h1>
-                <p class="text-center"><a href="{{ path('movie_past_index') }}">Past movies</a></p>
                 <div class="list-group">
                     {% for movie in movies %}
                         <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }} bg-darkest text-orange"
@@ -82,12 +81,6 @@
                                         <dd>
                                             {% include 'partials/comments-count.html.twig' %}
                                         </dd>
-                                        {% if movie.lukeBit %}
-                                            <button class="bit-button" type="button" data-toggle="modal" data-target="#modal-{{ movie.id }}">
-                                                {% include 'partials/random-luke-image.html.twig' %}
-                                            </button>
-                                            {% include 'partials/modal.html.twig' %}
-                                        {% endif %}
                                     </dl>
                                 </div>
                             </div>

@@ -26,10 +26,11 @@ class MovieController extends AbstractController
      * @Route("/movie/{movie}", name="movie_details")
      */
     public function movieDetailsAction(
-        Movie $movie,
+        Movie             $movie,
         CommentRepository $commentRepository,
-        ?Request $request = null
-    ) {
+        ?Request          $request = null
+    )
+    {
         $comment = new Comment();
         $comment->setMovie($movie);
         $commentForm = $this->createForm(CommentType::class, $comment, [
@@ -98,10 +99,11 @@ class MovieController extends AbstractController
      * @Route("/rating", name="submit_rating", methods={"POST"})
      */
     public function submitRating(
-        Request $request,
+        Request                $request,
         EntityManagerInterface $entityManager,
-        DateProvider $dateProvider
-    ) {
+        DateProvider           $dateProvider
+    )
+    {
         $rating = new Rating();
 
         $ratingForm = $this->createForm(RatingType::class, $rating);
@@ -140,49 +142,13 @@ class MovieController extends AbstractController
     public function movieComments(Movie $movie, CommentRepository $commentRepository)
     {
         $comments = $commentRepository->findBy([
-                                                   'movie' => $movie,
-                                               ], [
-                                                   'createdAt' => 'ASC'
-                                               ]);
+            'movie' => $movie,
+        ], [
+            'createdAt' => 'ASC'
+        ]);
 
         return $this->render('page/comments.html.twig', [
             'comments' => $comments,
-            'movie' => $movie,
-        ]);
-    }
-
-    /**
-     * @Route("/past", name="movie_past_index")
-     */
-    public function pastIndex(MovieRepository $movieRepository)
-    {
-        $currentYear = (int)(new \DateTime('now'))->format('Y');
-
-        $movies = $movieRepository->findAllExceptYear($currentYear);
-
-        $moviesByYear = [];
-
-        while ($movie = array_pop($movies)) {
-            $moviesByYear[$movie->getYearFeasted()][] = $movie;
-        }
-
-        return $this->render('page/past-index.html.twig', [
-            'moviesByYear' => $moviesByYear,
-        ]);
-    }
-
-    /**
-     * @Route("/past/{id}", name="movie_past_detail")
-     */
-    public function pastMovie($id, MovieRepository $movieRepository): Response
-    {
-        $movie = $movieRepository->find($id);
-
-        if (!$movie) {
-            throw $this->createNotFoundException();
-        }
-
-        return $this->render('page/past-movie.html.twig', [
             'movie' => $movie,
         ]);
     }
