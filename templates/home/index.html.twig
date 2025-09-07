@@ -24,7 +24,7 @@
                         <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }} bg-light text-travis-red"
                            style="display: flex; align-items: center;"
                            href="{{ path('movie_details', {movie:movie.id}) }}">
-                            {{ movie.startTime|date('M j, g:i A') }} – {{ movie.title }}
+                            {{ movie.startTime|date('M j, g:i A') }} – {{ movie.secret ? "SECRET" : movie.title }}
                             {% if movie.movieOver %}
                                 <span style="margin-left: auto" class="fa fa-check"></span>
                             {% endif %}
@@ -43,7 +43,7 @@
                     <li class="row" style="margin-bottom: 24px;">
                         <div class="col-sm-3">
                             <a href="{{ path('movie_details', {movie:movie.id}) }}">
-                                <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
+                                <img class="img-fluid" src="{{ movie.secret ? "https://placehold.co/300x446?text=SECRET" : omdb.getPosterURL(movie.imdb) }}" alt="" role="presentation">
                             </a>
                         </div>
                         <div class="col-sm-9">
@@ -55,14 +55,16 @@
                             <div style="margin-bottom: 16px;">
                                 <h2 style="display:inline;">
                                     <a href="{{ path('movie_details', { 'movie': movie.id }) }}">
-                                        {{ movie.title }}
+                                        {{ movie.secret ? "SECRET" : movie.title }}
                                     </a>
                                 </h2>
-                                <span>
-                                    <a href="https://imdb.com/title/{{ movie.imdb }}" target="_blank" rel="noopener">
-                                        (IMDb <span class="fa fa-external-link-alt"></span>)
-                                    </a>
-                                </span>
+                                {% if not movie.secret %}
+                                    <span>
+                                        <a href="https://imdb.com/title/{{ movie.imdb }}" target="_blank" rel="noopener">
+                                            (IMDb <span class="fa fa-external-link-alt"></span>)
+                                        </a>
+                                    </span>
+                                {% endif %}
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">

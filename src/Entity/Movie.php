@@ -249,4 +249,11 @@ class Movie
 
         return $interval->days > 14;
     }
+
+    public function isSecret(): bool
+    {
+        $now = new \DateTime('now');
+
+        return $this->startTime > $now;
+    }
 }

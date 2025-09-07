@@ -1,8 +1,10 @@
 <div>
-    <h1 class="d-inline m-0">{{ movie.title }}</h1>
-    <span>
-        <a href="https://imdb.com/title/{{ movie.imdb }}" target="_blank" rel="noopener">
-            (IMDb <span class="fa fa-external-link-alt"></span>)
-        </a>
-    </span>
+    <h1 class="d-inline m-0">{{ movie.secret ? "SECRET" : movie.title }}</h1>
+    {% if not movie.secret %}
+        <span>
+            <a href="https://imdb.com/title/{{ movie.imdb }}" target="_blank" rel="noopener">
+                (IMDb <span class="fa fa-external-link-alt"></span>)
+            </a>
+        </span>
+    {% endif %}
 </div>

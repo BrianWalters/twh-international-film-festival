@@ -21,9 +21,8 @@
                     data-bs-placement="bottom"
                     title="Genre & plot"
                     data-placement="bottom"
-                    data-content="{{ omdb(movie).Genre }}. {{ omdb(movie).Plot }}"
+                    data-content="{{ movie.secret ? "SECRET" : omdb(movie).Genre }}. {{ movie.secret ? "SECRET" : omdb(movie).Plot }}."
                 >
-
                     Reveal plot
                 </button>
             </div>
@@ -32,11 +31,11 @@
         <div class="row">
             <div class="col-sm">
                 <p>
-                    <img class="img-fluid" src="{{ omdb.getPosterURL(movie.imdb) }}" alt="{{ movie.title }}">
+                    <img class="img-fluid" src="{{ movie.secret ? "https://placehold.co/300x446?text=SECRET" : omdb.getPosterURL(movie.imdb) }}" alt="{{ movie.title }}">
                 </p>
             </div>
             <div class="col-sm">
-                {% include 'partials/movie-people.html.twig' %}
+                {% include 'partials/movie-people.html.twig' %
             </div>
             <div class="col-sm">
                 {% include 'partials/movie-info.html.twig' %}
