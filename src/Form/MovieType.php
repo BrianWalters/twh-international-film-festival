@@ -34,10 +34,6 @@ class MovieType extends AbstractType
             'required' => false,
             'help' => 'Leave blank to use value from OMDB. Enter number in minutes to set the runtime yourself.'
         ]);
-
-        $builder->add('lukeBit', CKEditorType::class, [
-            'required' => false,
-        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
