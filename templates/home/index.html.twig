@@ -4,7 +4,9 @@
 
 {% block head %}
     <meta property="og:title" name="og:title" content="{{ title }}" />
-    <meta property="og:description" name="og:description" content="{{ description }}" />
+    {% if description %}
+        <meta property="og:description" name="og:description" content="{{ description }}" />
+    {% endif %}
     <meta property="og:type" name="og:type" content="article" />
     <meta property="og:url" name="og:url" content="{{ app.request.uri }}" />
 {#    <meta property="og:image" name="og:image" content="{{ movies|length > 0 ? omdb.getPosterURL(movies[0].imdb) : ''}}" />#}

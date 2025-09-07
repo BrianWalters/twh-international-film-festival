@@ -28,11 +28,10 @@ class HomeController extends AbstractController
 
 
 
-        $description = implode(', ', array_map(fn(Movie $movie) => $movie->getTitle(), $movies));
 
         return $this->render('home/index.html.twig', [
             'title' => "Travis Wayne Hurt International Film Festival 2025",
-            'description' => $description,
+            'description' => null,
             'movies' => $movies,
         ]);
     }
