@@ -23,7 +23,7 @@ class Rating
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Choose a rating!")
-     * @Assert\Range(min="0", max="4")
+     * @Assert\Range(min="0", max="5")
      */
     private $score;
 
