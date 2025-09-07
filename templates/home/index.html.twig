@@ -16,12 +16,12 @@
 
 {% block body %}
     <main>
-        <div class="jumbotron jumbotron-fluid bg-dark text-light">
+        <div class="jumbotron jumbotron-fluid bg-travis-yellow">
             <div class="container">
-                <h1 class="display-4 text-center mb-3">{{ title }}</h1>
+                <h1 class="display-4 text-center mb-3 text-travis-red">{{ title }}</h1>
                 <div class="list-group">
                     {% for movie in movies %}
-                        <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }} bg-darkest text-orange"
+                        <a class="list-group-item list-group-item-action {{ movie.movieOver ? 'list-group-item-light' }} bg-light text-travis-red"
                            style="display: flex; align-items: center;"
                            href="{{ path('movie_details', {movie:movie.id}) }}">
                             {{ movie.startTime|date('M j, g:i A') }} – {{ movie.title }}

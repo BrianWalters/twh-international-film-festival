@@ -1,7 +1,12 @@
+:root {
+    --travis-yellow: #e1fb04;
+    --travis-red: #a01608;
+}
+
 /* RESET THE RESET */
 
 a {
-    color: var(--orange);
+    color: var(--travis-red);
     transition: color 250ms ease;
 }
 
@@ -9,13 +14,21 @@ a:hover, a:focus {
     color: var(--red);
 }
 
+body {
+    background-color: #e1fb04;
+}
+
 /* COLOR UTILITIES */
 .bg-darkest {
     background-color: #222222 !important;
 }
 
-.text-orange {
-    color: var(--orange) !important;
+.bg-travis-yellow {
+    background-color: var(--travis-yellow);
+}
+
+.text-travis-red {
+    color: #a01608 !important;
 }
 
 /* FORM */
@@ -38,10 +51,6 @@ a:hover, a:focus {
     border-bottom-left-radius: 0;
 }
 
-.bg-darkest.list-group-item {
-    border-color: var(--light);
-}
-
 a.bg-darkest.list-group-item:hover {
     background-color: #111111 !important;
 }
@@ -60,16 +69,16 @@ a.bg-darkest.list-group-item:hover {
     border-radius: 0;
 }
 
-.btn-orange {
-    background-color: var(--orange);
-    border-color: var(--light);
+.btn-travis-red {
+    background-color: var(--travis-red);
+    border-color: var(--dark);
     color: #fff;
     transition: background-color 250ms ease, border-color 250ms ease;
 }
 
-.btn-orange:hover {
+.btn-travis-red:hover {
     background-color: var(--red);
-    border-color: var(--light);
+    border-color: var(--dark);
     color: #fff;
 }
 

@@ -22,9 +22,6 @@ class RatingType extends AbstractType
     {
         $builder->add('rater', null, [
             'label' => 'Your name',
-            'attr' => [
-                'class' => 'bg-dark text-light',
-            ],
         ]);
         $builder->add('score', RatingScoreType::class);
         $builder->add('movie', HiddenType::class);

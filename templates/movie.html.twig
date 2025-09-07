@@ -16,7 +16,7 @@
         <div class="row mb-4">
             <div class="col-sm">
                 <button
-                    type="button" class="btn btn-lg btn-orange"
+                    type="button" class="btn btn-lg btn-travis-red"
                     data-toggle="popover"
                     data-bs-placement="bottom"
                     title="Genre & plot"
@@ -62,11 +62,11 @@
 
                 <ul class="list-group">
                     {% for rating in movie.ratings %}
-                        <li class="list-group-item bg-darkest text-light">
+                        <li class="list-group-item">
                             {{ stars.stars(rating.score) }} by <strong>{{ rating.rater }}</strong>
                         </li>
                     {% else %}
-                        <li class="list-group-item bg-darkest text-light">No ratings yet!</li>
+                        <li class="list-group-item">No ratings yet!</li>
                     {% endfor %}
                 </ul>
 
@@ -78,7 +78,7 @@
                     {{ form_start(ratingForm) }}
                     {{ form_widget(ratingForm) }}
                     <p>
-                        <button class="btn btn-orange" type="submit" formnovalidate>Submit</button>
+                        <button class="btn btn-travis-red" type="submit" formnovalidate>Submit</button>
                     </p>
                     {{ form_end(ratingForm) }}
                 {% endif %}
@@ -106,7 +106,7 @@
                     {{ form_start(commentForm) }}
                     {{ form_widget(commentForm) }}
                     <p>
-                        <button class="btn btn-orange" type="submit" formnovalidate>Submit</button>
+                        <button class="btn btn-travis-red" type="submit" formnovalidate>Submit</button>
                     </p>
                     {{ form_end(commentForm) }}
                 {% endif %}
