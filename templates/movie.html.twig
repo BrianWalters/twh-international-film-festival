@@ -2,7 +2,7 @@
 
 {% import 'partials/stars.html.twig' as stars %}
 
-{% block title %}{{ movie.title }}{% endblock %}
+{% block title %}{{ movie.secret ? "SECRET" : movie.title }}{% endblock %}
 
 {% block body %}
     <main class="container">

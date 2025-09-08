@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Comments for {{ omdb(movie).Title }}{% endblock %}
+{% block title %}Comments for {{ movie.secret ? "SECRET" : omdb(movie).Title }}{% endblock %}
 
 {% block body %}
     <main class="container">
