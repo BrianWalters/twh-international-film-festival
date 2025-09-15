@@ -113,6 +113,13 @@
         </div>
 
         <div class="row">
+            <div class="col col-md-6">
+                <h2>TWH says:</h2>
+                <p>{{ movie.secret ? "SECRET" : movie.curatorComment }}</p>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-sm">
                 <p>
                     <a href="{{ path('home') }}">Back home</a>
