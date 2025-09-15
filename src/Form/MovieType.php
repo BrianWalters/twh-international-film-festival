@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Movie;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -33,6 +32,10 @@ class MovieType extends AbstractType
         $builder->add('runtime', IntegerType::class, [
             'required' => false,
             'help' => 'Leave blank to use value from OMDB. Enter number in minutes to set the runtime yourself.'
+        ]);
+
+        $builder->add('curatorComment', TextareaType::class, [
+           'required' => false,
         ]);
     }
 

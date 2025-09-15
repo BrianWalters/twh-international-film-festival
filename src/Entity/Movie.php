@@ -57,6 +57,11 @@ class Movie
      */
     private ?string $title = null;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $curatorComment;
+
     public function __construct()
     {
         $this->ratings = new ArrayCollection();
@@ -255,5 +260,17 @@ class Movie
         $now = new \DateTime('now');
 
         return $this->startTime > $now;
+    }
+
+    public function getCuratorComment(): ?string
+    {
+        return $this->curatorComment;
+    }
+
+    public function setCuratorComment(?string $curatorComment): self
+    {
+        $this->curatorComment = $curatorComment;
+
+        return $this;
     }
 }
