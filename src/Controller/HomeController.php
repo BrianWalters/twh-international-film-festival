@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Movie;
-use App\OMDB\API;
 use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
@@ -27,10 +24,10 @@ class HomeController extends AbstractController
         );
 
 
-
+        $year = (new \DateTime())->format('Y');
 
         return $this->render('home/index.html.twig', [
-            'title' => "Travis Wayne Hurt International Film Festival 2025",
+            'title' => "Travis Wayne Hurt International Film Festival $year",
             'description' => null,
             'movies' => $movies,
         ]);
