@@ -18,7 +18,7 @@ class AppFixtures extends Fixture
         $this->userManager = $userManager;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         MovieFactory::createMany(42);
 

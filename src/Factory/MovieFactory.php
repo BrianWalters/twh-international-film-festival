@@ -4,9 +4,9 @@ namespace App\Factory;
 
 use App\Entity\Movie;
 use App\Repository\MovieRepository;
-use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
+use Zenstruck\Foundry\RepositoryProxy;
 
 /**
  * @extends ModelFactory<Movie>
@@ -101,7 +101,7 @@ final class MovieFactory extends ModelFactory
             'imdb' => self::faker()->randomElement(self::IMDB_IDS),
             'yearFeasted' => (int)$startTime->format('Y'),
             'startTime' => $startTime,
-            'lukeBit' => self::faker()->paragraph(),
+            'curatorComment' => self::faker()->paragraph(),
         ];
     }
 

@@ -9,22 +9,17 @@ use App\Entity\Rating;
 use App\Form\CommentType;
 use App\Form\RatingType;
 use App\Repository\CommentRepository;
-use App\Repository\MovieRepository;
 use App\Service\DateProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 class MovieController extends AbstractController
 {
-    /**
-     * @Route("/movie/{movie}", name="movie_details")
-     */
+    #[Route("/movie/{movie}", name: "movie_details")]
     public function movieDetailsAction(
         Movie             $movie,
         CommentRepository $commentRepository,
@@ -66,9 +61,7 @@ class MovieController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/comment", name="submit_comment", methods={"POST"})
-     */
+    #[Route("/comment", name:"submit_comment", methods: "POST")]
     public function submitComment(Request $request, EntityManagerInterface $entityManager)
     {
         $comment = new Comment();
@@ -95,9 +88,7 @@ class MovieController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/rating", name="submit_rating", methods={"POST"})
-     */
+    #[Route("/rating", name:"submit_rating", methods: "POST")]
     public function submitRating(
         Request                $request,
         EntityManagerInterface $entityManager,
@@ -136,9 +127,7 @@ class MovieController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/movie/{movie}/comments", name="movie_comments")
-     */
+    #[Route("/movie/{movie}/comments", name:"movie_comments")]
     public function movieComments(Movie $movie, CommentRepository $commentRepository)
     {
         $comments = $commentRepository->findBy([
